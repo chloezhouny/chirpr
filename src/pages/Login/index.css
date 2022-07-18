@@ -1,8 +1,9 @@
 .login {
 	text-align: center;
+	background-color: ;
 }
 
-.login div {
-	color: #1da1f2;
-	margin: 10px auto;
+.login button {
+	background-color: black;
+	border-color: black;
 }
