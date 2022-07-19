@@ -2,14 +2,22 @@ import {
   Button, Input, Form, Dialog,
 } from 'antd-mobile';
 
+import loginAPI from '../../utils/LoginAPI';
 import './index.css';
 
 function Login() {
   const [form] = Form.useForm();
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const values = form.getFieldsValue();
+    const res = await loginAPI(values.username, values.password);
+    if (res && res.length > 0) {
+      Dialog.alert({
+        content: 'You are successfully logged in',
+      });
+      return;
+    }
     Dialog.alert({
-      content: <pre>{JSON.stringify(values, null, 2)}</pre>,
+      content: 'Incorrect username or password',
     });
   };
   return (
