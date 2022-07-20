@@ -1,33 +1,46 @@
-import { useState } from "react";
-import "./index.css";
+import {
+  Button, Input, Form, Dialog,
+} from 'antd-mobile';
 
-const Login = () => {
-	const [userName, setUserName] = useState();
-	const [password, setPassword] = useState();
-	const handleClick = () => {
-		alert("Sucess! " + userName + ", " + password);
-	};
+import loginAPI from '../../utils/LoginAPI';
+import './index.css';
 
-	const handleUsernameChange = (e) => {
-		setUserName(e.target.value);
-	};
-	const handlePasswordChange = (e) => {
-		setPassword(e.target.value);
-	};
-	return (
-		<div className="login">
-			<div>
-				Username: <input onChange={handleUsernameChange} type="text" />
-			</div>
-			<div>
-				Passowrd:{" "}
-				<input type="password" onChange={handlePasswordChange} type="text" />
-			</div>
-			<div>
-				<button onClick={handleClick}>Login</button>
-			</div>
-		</div>
-	);
-};
+function Login() {
+  const [form] = Form.useForm();
+  const onSubmit = async () => {
+    const values = form.getFieldsValue();
+    const res = await loginAPI(values.username, values.password);
+    if (res && res.length > 0) {
+      Dialog.alert({
+        content: 'You are successfully logged in',
+      });
+      return;
+    }
+    Dialog.alert({
+      content: 'Incorrect username or password',
+    });
+  };
+  return (
+    <div className="login">
+      <Form
+        form={form}
+        layout="horizontal"
+        mode="card"
+        footer={(
+          <Button block color="primary" onClick={onSubmit} size="large">
+            Log in
+          </Button>
+   )}
+      >
+        <Form.Item name="username">
+          <Input placeholder="Phone, email, or username" />
+        </Form.Item>
+        <Form.Item name="password">
+          <Input placeholder="Password" clearable type="password" />
+        </Form.Item>
+      </Form>
+    </div>
+  );
+}
 
 export default Login;
