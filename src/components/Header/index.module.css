@@ -1,0 +1,19 @@
+.header {
+	height: 50px;
+	text-align: center;
+	position: relative;
+}
+
+.close {
+	position: absolute;
+	width: 13px;
+	top: 15px;
+	left: 18px;
+}
+
+.logo {
+	height: 30px;
+	margin-top: 10px;
+	filter: invert(61%) sepia(91%) saturate(2631%) hue-rotate(159deg)
+		brightness(90%) contrast(109%);
+}
