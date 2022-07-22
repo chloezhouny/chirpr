@@ -1,5 +1,5 @@
 import close from '../../assets/close.svg';
-import logo from '../../assets/cat-512.png';
+import logo from '../../assets/cat-solid.svg';
 
 import styles from './index.module.css';
 
