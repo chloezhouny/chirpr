@@ -6,14 +6,14 @@
 
 .close {
 	position: absolute;
-	width: 13px;
-	top: 15px;
-	left: 18px;
+	width: 17px;
+	top: 17px;
+	left: 16px;
 }
 
 .logo {
 	height: 30px;
-	margin-top: 10px;
-	filter: invert(61%) sepia(91%) saturate(2631%) hue-rotate(159deg)
-		brightness(90%) contrast(109%);
+	margin-top: 14px;
+/*	filter: invert(61%) sepia(91%) saturate(2631%) hue-rotate(159deg)
+		brightness(90%) contrast(109%);*/
 }
