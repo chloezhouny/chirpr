@@ -1,6 +1,7 @@
 import { Button, Input } from 'antd-mobile';
-import Header from '../../components/Header';
-import DatePicker from '../../components/DatePicker';
+// eslint-disable-next-line import/no-unresolved
+import Header from '@components/Header';
+import DatePicker from '@components/DatePicker';
 import styles from './index.module.css';
 
 function Signup() {
