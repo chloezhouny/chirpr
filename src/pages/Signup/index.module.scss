@@ -1,0 +1,81 @@
+@value tBlue rgb(29, 155, 240);
+@value tBlack rgb(15, 20, 25);
+
+.form {
+	padding: 0 30px;
+}
+
+.formTitle {
+	color: tBlack;
+	font-size: 25px;
+	font-weight: 700;
+	height: 68px;
+	line-height: 68px;
+}
+
+.formContainer {
+	:global(.adm-list-body) {
+		background: none;
+		border: none;
+		:global(.adm-list-item) {
+			background: none;
+			padding: 0;
+			:global(.adm-list-item-content) {
+				border: none;
+				padding: 0;
+				:global(.adm-list-item-content-main) {
+					padding: 0;
+				}
+			}
+		}
+	}
+}
+
+.input {
+	composes: input from "../../main.module.scss";
+	composes: mediumInput from "../../main.module.scss";
+}
+
+.useEmail {
+	color: tBlue;
+	float: right;
+	font-size: 13.5px;
+	font-weight: 500;
+	line-height: 19px;
+	margin-top: 1px;
+}
+
+.birthDateTitle {
+	color: tBlack;
+	font-size: 14px;
+	font-weight: 700;
+	margin-top: 40px;
+	margin-bottom: 8.5px;
+}
+
+.birthDateContent {
+	font-size: 13px;
+	margin-bottom: 1px;
+}
+
+.footer {
+	box-sizing: border-box;
+	position: fixed;
+	bottom: 23px;
+	min-height: 51px;
+	padding: 0 30px;
+	text-align: center;
+	width: 100%;
+}
+
+.footerBtn {
+	background-color: tBlack;
+	border-radius: 9999px;
+	color: rgba(255, 255, 255);
+	font-size: 16px;
+	margin: 0 auto;
+	min-height: 51px;
+	opacity: 0.5;
+	width: 100%;
+	font-weight: 900;
+}

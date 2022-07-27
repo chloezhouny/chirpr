@@ -1,0 +1,20 @@
+:global(.adm-input) {
+  		--placeholder-color: rgb(83, 100, 113);
+}
+
+.input {
+	border: solid 1px rgb(207, 217, 222);
+	border-radius: 4px;
+	padding: 9px 8px 10px 8px;
+	font-size: 14px;
+	box-sizing: border-box;
+	margin: 12px 0;
+}
+
+.mediumInput {
+	height: 55px;
+}
+
+.largeInput {
+	height: 57px;
+}

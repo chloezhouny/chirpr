@@ -1,0 +1,68 @@
+@value tBlack rgb(15, 20, 25);
+
+.datePickerContainer {
+	composes: input from "../../main.module.scss";
+	composes: largeInput from "../../main.module.scss";
+}
+
+.datePickerName {
+	color: rgb(83, 100, 113);
+	font-size: 16px;
+	padding-top: 6px;
+}
+
+.datePickerPlaceholder {
+	color: tBlack;
+	font-size: 15px;
+	margin-top: -14px;
+	margin-bottom: 5px;
+	padding-right: 3px;
+	padding-left: 2px;
+}
+
+.calendarIcon {
+	float: right;
+	height: 15px;
+	padding-top: 3px;
+}
+
+:global(.adm-mask) {
+	background: rgba(255, 255, 255, 0) !important;
+}
+
+:global(.adm-picker-header-button:last-child) {
+	background-color: tBlack;
+	border-radius: 9999px;
+	color: rgba(255, 255, 255);
+	text-align: center;
+	--header-button-font-size: 14px;
+	margin: 0 10px 0 auto;
+	min-height: 15px;
+	width: 13%;
+	font-weight: 900;
+}
+
+:global(.adm-picker-view) {
+	:global(.adm-picker-view-column-item) {
+		color: tblack;
+		--item-font-size: 22px;
+	}
+	:global(.adm-picker-view-column:first-child) {
+		order: 1;
+		:global(.adm-picker-view-column-item) {
+			justify-content: left;
+		}
+	}
+	:global(.adm-picker-view-column:nth-child(2)) {
+		:global(.adm-picker-view-column-item) {
+			justify-content: right;
+		}
+	}
+	:global(.adm-picker-view-mask-middle) {
+		background: rgba(83, 100, 113, 0.05);
+		width: 96%;
+		margin: 0 auto;
+		border: none;
+		border-radius: 7px;
+	}
+}
