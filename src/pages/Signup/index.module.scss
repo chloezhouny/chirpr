@@ -12,6 +12,12 @@
 	line-height: 68px;
 }
 
+.formSubTitle {
+	color: $tGray;
+	font-size: 14px;
+	margin-top: -10px;
+}
+
 .formContainer {
 	:global(.adm-list-body) {
 		background: none;
@@ -97,3 +103,24 @@
 	opacity: 1;
 }
 
+.userInfoContainer {
+	border: solid 1px $tLightGray;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 30px 0;
+}
+
+.userInfo {
+	font-size: 15px;
+	height: 40px;
+	line-height: 40px;
+	color: $tGray;
+	font-weight: 450;
+	:global(span){
+		color: $tBlack;
+	}
+}
+
+.passwordInput {
+	margin: 30px 0;
+}

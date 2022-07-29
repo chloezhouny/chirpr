@@ -1,6 +1,7 @@
 $tBlue: rgb(29, 155, 240);
 $tBlack: rgb(15, 20, 25);
 $tGray: rgb(83, 100, 113);
+$tLightGray: rgb(207, 217, 222);
 $tRed: rgb(244, 33, 46);
 
 :global(.adm-input) {
@@ -9,7 +10,7 @@ $tRed: rgb(244, 33, 46);
 }
 
 .input {
-	border: solid 1px rgb(207, 217, 222);
+	border: solid 1px $tLightGray;
 	border-radius: 4px;
 	padding: 10px 9px 10px 8px;
 	box-sizing: border-box;
