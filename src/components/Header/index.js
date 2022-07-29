@@ -1,7 +1,7 @@
 import close from '../../assets/close.svg';
-import logo from '../../assets/cat-solid.svg';
+import logo from '../../assets/bird-512.png';
 
-import styles from './index.module.css';
+import styles from './index.module.scss';
 
 function Header() {
   return (

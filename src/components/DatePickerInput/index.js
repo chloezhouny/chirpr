@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { DatePicker } from 'antd-mobile';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -8,10 +8,32 @@ import numToMonth from './numToMonth';
 
 const now = new Date();
 const min = new Date('Jan 1, 1900');
+
 function DatePickerInput({ value, onChange }) {
   const [visible, setVisible] = useState(false);
-  const handleDatePicker = () => {
+  const [contentFocused, setContentFocused] = useState(false);
+  const [containerFocused, setContainerFocused] = useState(false);
+
+  useEffect(() => {
+    if (value) {
+      setContentFocused(true);
+      setContainerFocused(true);
+    }
+  }, []);
+
+  const handleOnClick = () => {
     setVisible(true);
+    setContentFocused(true);
+    setContainerFocused(true);
+  };
+
+  const handleConfirm = (val) => {
+    setVisible(false);
+    onChange(moment(val).format('MM/DD/YYYY'));
+    if (val.length === 0) {
+      setContentFocused(false);
+    }
+    setContainerFocused(false);
   };
 
   const labelRenderer = useCallback((type, data) => {
@@ -30,26 +52,28 @@ function DatePickerInput({ value, onChange }) {
         cancelText=""
         confirmText="Next"
         visible={visible}
-        onClose={() => {
-          setVisible(false);
-        }}
         min={min}
         max={now}
         defaultValue={now}
-        onConfirm={(val) => {
-          onChange(moment(val).format('MM/DD/YYYY'));
-        }}
+        onConfirm={handleConfirm}
         renderLabel={labelRenderer}
       />
-      <div className={styles.datePickerContainer} onClick={handleDatePicker}>
-        <div className={styles.datePickerName}>Date of birth</div>
-        <div className={styles.datePickerPlaceholder}>
+      <div
+        className={containerFocused ? styles.containerFocused : styles.container}
+        onClick={handleOnClick}
+      >
+        <div className={contentFocused ? styles.nameFocused : styles.name}>Date of birth</div>
+        <div className={contentFocused ? styles.placeholderFocused : styles.placeholder}>
           <span>
             {' '}
             {value ? moment(value).format('MM/DD/YYYY') : 'mm/dd/yyyy'}
             {' '}
           </span>
-          <img src={calendarIcon} alt="calendarIcon" className={styles.calendarIcon} />
+          <img
+            src={calendarIcon}
+            alt="calendarIcon"
+            className={styles.calendarIcon}
+          />
         </div>
       </div>
     </>
@@ -57,8 +81,13 @@ function DatePickerInput({ value, onChange }) {
 }
 
 DatePickerInput.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
+
+DatePickerInput.defaultProps = {
+  value: '',
+  onChange: () => {},
 };
 
 export default DatePickerInput;

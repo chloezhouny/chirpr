@@ -1,23 +1,50 @@
-@value tBlack rgb(15, 20, 25);
+@import "../../main.module.scss";
 
-.datePickerContainer {
+.container {
 	composes: input from "../../main.module.scss";
 	composes: largeInput from "../../main.module.scss";
 }
 
-.datePickerName {
-	color: rgb(83, 100, 113);
-	font-size: 16px;
-	padding-top: 6px;
+.containerFocused {
+	composes: container;
+	border: solid 2px $tBlue;
 }
 
-.datePickerPlaceholder {
-	color: tBlack;
-	font-size: 15px;
-	margin-top: -14px;
+.name {
+	position: absolute;
+	top: 22px;
+	left: 9px;
+	color: $tGray;
+	font-size: 16px;
+	font-weight: 450;
+	padding-top: 5.5px;
+}
+
+.nameFocused {
+	composes: name;
+	top: 13px;
+	left: 9px;
+	color: $tBlue;
+	font-size: 13px;
+	transition: all 0.3s;
+}
+
+.placeholder {
+	color: $tBlack;
+	font-size: 16px;
+	font-family: "Helvetica";
+	letter-spacing: 1px;
+	margin-top: 15px;
 	margin-bottom: 5px;
 	padding-right: 3px;
 	padding-left: 2px;
+}
+
+.placeholderFocused {
+	composes: placeholder;
+	margin-top: 14px;
+	padding-left: 1px;
+
 }
 
 .calendarIcon {
@@ -31,7 +58,7 @@
 }
 
 :global(.adm-picker-header-button:last-child) {
-	background-color: tBlack;
+	background-color: $tBlack;
 	border-radius: 9999px;
 	color: rgba(255, 255, 255);
 	text-align: center;

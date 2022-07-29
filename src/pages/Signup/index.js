@@ -1,29 +1,90 @@
 import { useState } from 'react';
-import { Button, Input, Form } from 'antd-mobile';
+import { Form } from 'antd-mobile';
 
 import Header from '@components/Header';
 import DatePickerInput from '@components/DatePickerInput';
+import TInput from '@components/TInput';
+import Footer from './components/Footer';
 import styles from './index.module.scss';
 
-const USERNAME_TYPE = {
+const ACCOUNT_TYPE = {
   PHONE: 'phone',
   EMAIL: 'email',
 };
 function Signup() {
+  const [form] = Form.useForm();
   const [formData] = useState({
     name: '',
     phone: '',
     email: '',
     birthDate: '',
   });
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.PHONE);
+  const [validName, setValidName] = useState(true);
+  const [validPhone, setValidPhone] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
 
-  const [usernameType, setUsernameType] = useState(USERNAME_TYPE.PHONE);
+  const [footerBtnDisabled, setFooterBtnDisabled] = useState(true);
+
   const onUsernameTypeChange = () => {
-    if (usernameType === USERNAME_TYPE.PHONE) {
-      setUsernameType(USERNAME_TYPE.EMAIL);
+    if (accountType === ACCOUNT_TYPE.PHONE) {
+      setAccountType(ACCOUNT_TYPE.EMAIL);
       return;
     }
-    setUsernameType(USERNAME_TYPE.PHONE);
+    setAccountType(ACCOUNT_TYPE.PHONE);
+  };
+
+  const handleSubmit = async () => {
+    const validated = await form.validateFields();
+    if (validated) {
+      console.log(validated);
+    }
+  };
+
+  const handleValuesChange = async (_, v) => {
+    console.log(v, _);
+    try {
+      const validated = await form.validateFields();
+      if (validated) {
+        setFooterBtnDisabled(false);
+        return;
+      }
+    } catch (e) {
+      if (e.errorFields.length === 0) {
+        setFooterBtnDisabled(false);
+        return;
+      }
+      setFooterBtnDisabled(true);
+    }
+  };
+
+  const checkName = (_, val) => {
+    if (val.length > 0) {
+      setValidName(true);
+      return Promise.resolve();
+    }
+    setValidName(false);
+    return Promise.reject(new Error("What's your name?"));
+  };
+
+  const checkPhone = (_, val) => {
+    const phoneRegex = /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm;
+    if (phoneRegex.test(val)) {
+      setValidPhone(true);
+      return Promise.resolve();
+    }
+    setValidPhone(false);
+    return Promise.reject(new Error('Please enter a valid phone number.'));
+  };
+
+  const checkEmail = (_, val) => {
+    const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/g;
+    if (emailRegex.test(val)) {
+      setValidEmail(true);
+      return Promise.resolve();
+    }
+    setValidEmail(false);
+    return Promise.reject(new Error('Please enter a valid email.'));
   };
 
   return (
@@ -31,37 +92,69 @@ function Signup() {
       <Header />
       <div className={styles.form}>
         <div className={styles.formTitle}>Create your account</div>
-        <Form initialValues={formData} className={styles.formContainer}>
-          <Form.Item name="name">
-            <Input placeholder="Name" className={styles.input} />
+        <Form
+          form={form}
+          initialValues={formData}
+          onValuesChange={handleValuesChange}
+          className={styles.formContainer}
+        >
+          <Form.Item
+            name="name"
+            rules={
+              [{ required: true, message: '' },
+                { validator: checkName },
+              ]
+            }
+          >
+            <TInput length={50} label="Name" valid={validName} />
           </Form.Item>
-          {usernameType === USERNAME_TYPE.PHONE && (
-          <Form.Item name="phone">
-            <Input placeholder="Phone" className={styles.input} />
-            {' '}
-          </Form.Item>
+          {accountType === ACCOUNT_TYPE.PHONE && (
+            <Form.Item
+              name="phone"
+              rules={[
+                { required: true, message: '' },
+                { validator: checkPhone },
+              ]}
+            >
+              <TInput label="Phone" valid={validPhone} />
+            </Form.Item>
           )}
-          {usernameType === USERNAME_TYPE.EMAIL && (
-          <Form.Item name="email">
-            <Input placeholder="Email" className={styles.input} />
-          </Form.Item>
+          {accountType === ACCOUNT_TYPE.EMAIL && (
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: '',
+                },
+                { validator: checkEmail },
+              ]}
+            >
+              <TInput label="Email" valid={validEmail} />
+            </Form.Item>
           )}
           <div className={styles.useEmail} onClick={onUsernameTypeChange}>
-            {usernameType === USERNAME_TYPE.PHONE ? 'Use email instead' : 'Use phone instead'}
+            {accountType === ACCOUNT_TYPE.PHONE
+              ? 'Use email instead'
+              : 'Use phone instead'}
           </div>
           <div className={styles.birthDateTitle}>Date of birth</div>
           <div className={styles.birthDateContent}>
-            This will not be shown publicly.
-            Confirm your own age, even if this account is for a business, a pet, or something else.
+            This will not be shown publicly. Confirm your own age, even if this
+            account is for a business, a pet, or something else.
           </div>
-          <Form.Item name="birthDate">
+          <Form.Item
+            name="birthDate"
+            rules={[{
+              required: true,
+              message: '',
+            }]}
+          >
             <DatePickerInput />
           </Form.Item>
         </Form>
       </div>
-      <div className={styles.footer}>
-        <Button className={styles.footerBtn}>Next</Button>
-      </div>
+      <Footer handleSubmit={handleSubmit} disabled={footerBtnDisabled} />
     </div>
   );
 }
