@@ -1,17 +1,28 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'antd-mobile';
+import moment from 'moment';
 import TInput from '@components/TInput';
 import Footer from './Footer';
 import styles from '../index.module.scss';
 
-function SignupSecondStep({ userInfo, handleSignupSubmit }) {
+const STEP = {
+  FIRST: 1,
+  SECOND: 2,
+};
+
+function SignupSecondStep({
+  userInfo, handleSignupSubmit, setStep,
+}) {
   const [form] = Form.useForm();
   const [password, setPassword] = useState();
   const [footerBtnDisabled, setFooterBtnDisabled] = useState(true);
   const [validPwd, setValidPwd] = useState(true);
   const [validConfirmedPwd, setValidConfirmedPwd] = useState(true);
 
+  const handleClick = () => {
+    setStep(STEP.FIRST);
+  };
   const handleSubmit = () => {
     handleSignupSubmit(password);
   };
@@ -41,7 +52,9 @@ function SignupSecondStep({ userInfo, handleSignupSubmit }) {
     }
     setValidPwd(false);
     return Promise.reject(
-      new Error('Your password needs to be at least 8 characters. Please enter a longer one.'),
+      new Error(
+        'Your password needs to be at least 8 characters. Please enter a longer one.',
+      ),
     );
   };
 
@@ -51,49 +64,44 @@ function SignupSecondStep({ userInfo, handleSignupSubmit }) {
       return Promise.resolve();
     }
     setValidConfirmedPwd(false);
-    return Promise.reject(
-      new Error('Passwords does not match.'),
-    );
+    return Promise.reject(new Error('Passwords does not match.'));
   };
 
   return (
     <div className={styles.secondStep}>
       <div className={styles.form}>
         <div className={styles.formTitle}>You&apos;ll need a password</div>
-        <div className={styles.formSubTitle}>Make sure it&apos;s 8 characters or more.</div>
+        <div className={styles.formSubTitle}>
+          Make sure it&apos;s 8 characters or more.
+        </div>
         <div className={styles.userInfoContainer}>
-          <div className={styles.userInfo}>
-            Name
-            <span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;
-              {userInfo.name}
-            </span>
+          <div className={styles.userInfo} onClick={handleClick}>
+            <div>Name</div>
+            <div>
+              {userInfo.username}
+            </div>
           </div>
           {userInfo.email && (
-            <div className={styles.UserInfo}>
-              Email
-              <span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div className={styles.UserInfo} onClick={handleClick}>
+              <div>Email</div>
+              <div>
                 {userInfo.email}
-              </span>
+              </div>
             </div>
           )}
           {userInfo.phone && (
-            <div className={styles.userInfo}>
-              Phone
-              <span>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div className={styles.userInfo} onClick={handleClick}>
+              <div>Phone</div>
+              <div>
                 {userInfo.phone}
-              </span>
+              </div>
             </div>
           )}
-          <div className={styles.userInfo}>
-            Date of birth
-            <span>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-              {userInfo.birthDate}
-            </span>
+          <div className={styles.userInfo} onClick={handleClick}>
+            <div>Birth date</div>
+            <div>
+              {moment(userInfo.birthDate).format('MMM DD, YYYY')}
+            </div>
           </div>
         </div>
         <Form
@@ -111,7 +119,12 @@ function SignupSecondStep({ userInfo, handleSignupSubmit }) {
               { validator: checkPwd },
             ]}
           >
-            <TInput className={styles.passwordInput} valid={validPwd} label="Password" type="password" />
+            <TInput
+              className={styles.passwordInput}
+              valid={validPwd}
+              label="Password"
+              type="password"
+            />
           </Form.Item>
           <Form.Item
             name="confirmPassword"
@@ -123,24 +136,33 @@ function SignupSecondStep({ userInfo, handleSignupSubmit }) {
               { validator: checkConfirmedPwd },
             ]}
           >
-            <TInput className={styles.passwordInput} valid={validConfirmedPwd} label="Confirm password" type="password" />
+            <TInput
+              className={styles.passwordInput}
+              valid={validConfirmedPwd}
+              label="Confirm password"
+              type="password"
+            />
           </Form.Item>
         </Form>
       </div>
-      <Footer disabled={footerBtnDisabled} btnLabel="Sign up" handleNext={handleSubmit} />
+      <Footer
+        disabled={footerBtnDisabled}
+        btnLabel="Sign up"
+        handleNext={handleSubmit}
+      />
     </div>
-
   );
 }
 
 SignupSecondStep.propTypes = {
   userInfo: PropTypes.shape({
-    name: PropTypes.string,
+    username: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
     birthDate: PropTypes.string,
   }).isRequired,
   handleSignupSubmit: PropTypes.func.isRequired,
+  setStep: PropTypes.func.isRequired,
 };
 
 export default SignupSecondStep;

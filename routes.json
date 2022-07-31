@@ -1,4 +1,5 @@
 {
+	"/api/accounts/signup": "/user",
 	"/api/login/:username/:password": "/user/?username=:username&password:password"
 }
 

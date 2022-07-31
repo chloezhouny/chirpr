@@ -12,12 +12,14 @@ const ACCOUNT_TYPE = {
 };
 function SignupFirstStep({ handleNextStep }) {
   const [form] = Form.useForm();
+
   const [formData] = useState({
-    name: '',
+    username: '',
     phone: '',
     email: '',
     birthDate: '',
   });
+
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.PHONE);
   const [validName, setValidName] = useState(true);
   const [validPhone, setValidPhone] = useState(true);
@@ -97,12 +99,8 @@ function SignupFirstStep({ handleNextStep }) {
           className={styles.formContainer}
         >
           <Form.Item
-            name="name"
-            rules={
-              [{ required: true, message: '' },
-                { validator: checkName },
-              ]
-            }
+            name="username"
+            rules={[{ required: true, message: '' }, { validator: checkName }]}
           >
             <TInput length={50} label="Name" valid={validName} />
           </Form.Item>
@@ -143,16 +141,22 @@ function SignupFirstStep({ handleNextStep }) {
           </div>
           <Form.Item
             name="birthDate"
-            rules={[{
-              required: true,
-              message: '',
-            }]}
+            rules={[
+              {
+                required: true,
+                message: '',
+              },
+            ]}
           >
             <DatePickerInput />
           </Form.Item>
         </Form>
       </div>
-      <Footer handleNext={handleNext} disabled={footerBtnDisabled} btnLabel="Next" />
+      <Footer
+        handleNext={handleNext}
+        disabled={footerBtnDisabled}
+        btnLabel="Next"
+      />
     </>
   );
 }
