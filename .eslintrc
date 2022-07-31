@@ -8,11 +8,26 @@
 		}
 	},
 	"rules": {
+	  "jsx-a11y/no-static-element-interactions": 0,
+	  "jsx-a11y/no-noninteractive-element-interactions": 0,
+	  "jsx-a11y/click-events-have-key-events": 0,
 	  "react/jsx-filename-extension": [1, {"extensions": [".js"]}],
 	  "react/react-in-jsx-scope": 0,
-	  "react/function-component-definition": 1
+	  "react/function-component-definition": 0
 	},
 	"env": {
 		"browser": true
+	},
+	"settings": {
+	  "import/resolver": {
+	    "alias": {
+	      "map": [
+	        ["@components", "./src/components"],
+	        ["@assets", "./src/assets"],
+	        ["@utils", "./src/utils"],
+	        ["@pages", "./src/pages"]
+	      ]
+	    }
+	  }
 	}
 }

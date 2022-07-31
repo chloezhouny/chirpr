@@ -1,0 +1,95 @@
+@import "../../main.module.scss";
+
+.container {
+	composes: input from "../../main.module.scss";
+	composes: largeInput from "../../main.module.scss";
+}
+
+.containerFocused {
+	composes: container;
+	border: solid 2px $tBlue;
+}
+
+.name {
+	position: absolute;
+	top: 22px;
+	left: 9px;
+	color: $tGray;
+	font-size: 16px;
+	font-weight: 450;
+	padding-top: 5.5px;
+}
+
+.nameFocused {
+	composes: name;
+	top: 13px;
+	left: 9px;
+	color: $tBlue;
+	font-size: 13px;
+	transition: all 0.3s;
+}
+
+.placeholder {
+	color: $tBlack;
+	font-size: 16px;
+	font-family: "Helvetica";
+	letter-spacing: 1px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	padding-right: 3px;
+	padding-left: 2px;
+}
+
+.placeholderFocused {
+	composes: placeholder;
+	margin-top: 14px;
+	padding-left: 1px;
+
+}
+
+.calendarIcon {
+	float: right;
+	height: 15px;
+	padding-top: 3px;
+}
+
+:global(.adm-mask) {
+	background: rgba(255, 255, 255, 0) !important;
+}
+
+:global(.adm-picker-header-button:last-child) {
+	background-color: $tBlack;
+	border-radius: 9999px;
+	color: rgba(255, 255, 255);
+	text-align: center;
+	--header-button-font-size: 14px;
+	margin: 0 10px 0 auto;
+	min-height: 15px;
+	width: 13%;
+	font-weight: 900;
+}
+
+:global(.adm-picker-view) {
+	:global(.adm-picker-view-column-item) {
+		color: tblack;
+		--item-font-size: 22px;
+	}
+	:global(.adm-picker-view-column:first-child) {
+		order: 1;
+		:global(.adm-picker-view-column-item) {
+			justify-content: left;
+		}
+	}
+	:global(.adm-picker-view-column:nth-child(2)) {
+		:global(.adm-picker-view-column-item) {
+			justify-content: right;
+		}
+	}
+	:global(.adm-picker-view-mask-middle) {
+		background: rgba(83, 100, 113, 0.05);
+		width: 96%;
+		margin: 0 auto;
+		border: none;
+		border-radius: 7px;
+	}
+}
