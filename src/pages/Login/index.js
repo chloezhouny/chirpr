@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Button, Form, Dialog,
+  Button, Form, Toast,
 } from 'antd-mobile';
 import TInput from '@components/TInput';
 import loginAPI from '@utils/LoginAPI';
@@ -32,13 +32,14 @@ function Login() {
     const res = await loginAPI(values.username, values.password);
     if (res.success && res.data.length > 0) {
       console.log(res);
-      Dialog.alert({
+      Toast.show({
         content: 'You are successfully logged in',
+        position: 'top',
       });
       return;
     }
-    Dialog.alert({
-      content: 'Incorrect username or password',
+    Toast.show({
+      content: 'Wrong username or password!',
     });
   };
 
@@ -48,7 +49,7 @@ function Login() {
         <img src={logo} alt="twittuer-logo" className={styles.logo} />
       </header>
       <div className={styles.form}>
-        <div className={styles.formTitle}>Sign in to Twitter</div>
+        <div className={styles.formTitle}>Sign in to Twittuer</div>
         <Form
           form={form}
           onValuesChange={handleValuesChange}

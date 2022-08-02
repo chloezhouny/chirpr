@@ -3,10 +3,16 @@ $tBlack: rgb(15, 20, 25);
 $tGray: rgb(83, 100, 113);
 $tLightGray: rgb(207, 217, 222);
 $tRed: rgb(244, 33, 46);
+$tFont: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
 :global(.adm-input) {
 	--placeholder-color: $tGray;
 	opacity: 0.8;
+}
+
+.tFont {
+	font-family: $tFont;
+	letter-spacing: -0.2px;
 }
 
 .input {
@@ -78,5 +84,8 @@ $tRed: rgb(244, 33, 46);
 	min-height: 51px;
 	width: 100%;
 	font-weight: 800;
-    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: $tFont;
 }
+
+
+
