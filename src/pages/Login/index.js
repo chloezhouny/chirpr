@@ -1,16 +1,37 @@
+import { useState } from 'react';
 import {
-  Button, Input, Form, Dialog,
+  Button, Form, Dialog,
 } from 'antd-mobile';
-
-import loginAPI from '../../utils/LoginAPI';
-import './index.css';
+import TInput from '@components/TInput';
+import loginAPI from '@utils/LoginAPI';
+import logo from '../../assets/bird.png';
+import styles from './index.module.scss';
 
 function Login() {
   const [form] = Form.useForm();
-  const onSubmit = async () => {
+  const [footerBtnDisabled, setFooterBtnDisabled] = useState(true);
+
+  const handleValuesChange = async () => {
+    try {
+      const validated = await form.validateFields();
+      if (validated) {
+        setFooterBtnDisabled(false);
+        return;
+      }
+    } catch (e) {
+      if (e.errorFields.length === 0) {
+        setFooterBtnDisabled(false);
+        return;
+      }
+      setFooterBtnDisabled(true);
+    }
+  };
+
+  const handleSubmit = async () => {
     const values = form.getFieldsValue();
     const res = await loginAPI(values.username, values.password);
-    if (res && res.length > 0) {
+    if (res.success && res.data.length > 0) {
+      console.log(res);
       Dialog.alert({
         content: 'You are successfully logged in',
       });
@@ -20,26 +41,35 @@ function Login() {
       content: 'Incorrect username or password',
     });
   };
+
   return (
-    <div className="login">
-      <Form
-        form={form}
-        layout="horizontal"
-        mode="card"
-        footer={(
-          <Button block color="primary" onClick={onSubmit} size="large">
-            Log in
-          </Button>
-   )}
-      >
-        <Form.Item name="username">
-          <Input placeholder="Phone, email, or username" />
-        </Form.Item>
-        <Form.Item name="password">
-          <Input placeholder="Password" clearable type="password" />
-        </Form.Item>
-      </Form>
-    </div>
+    <>
+      <header>
+        <img src={logo} alt="twittuer-logo" className={styles.logo} />
+      </header>
+      <div className={styles.form}>
+        <div className={styles.formTitle}>Sign in to Twitter</div>
+        <Form
+          form={form}
+          onValuesChange={handleValuesChange}
+          className={styles.formContainer}
+        >
+          <Form.Item name="username" rules={[{ required: true, message: '' }]}>
+            <TInput label="Phone, email, or username" valid="1" />
+          </Form.Item>
+          <Form.Item name="password" rules={[{ required: true, message: '' }]}>
+            <TInput label="Password" type="password" valid="1" />
+          </Form.Item>
+        </Form>
+        <Button className={styles.footerBtn} onClick={handleSubmit} disabled={footerBtnDisabled}>
+          Log in
+        </Button>
+      </div>
+      <div className={styles.signup}>
+        Don&apos;t have an account?
+        <a href="/" target="_blank">Sign up</a>
+      </div>
+    </>
   );
 }
 

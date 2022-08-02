@@ -29,3 +29,54 @@ $tRed: rgb(244, 33, 46);
 	composes: input;
 	height: 57px;
 }
+
+.formTitle {
+	color: $tBlack;
+	font-size: 25px;
+	font-weight: 700;
+	height: 68px;
+	line-height: 68px;
+	font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.formContainer {
+	:global(.adm-list-body) {
+		background: none;
+		border: none;
+		:global(.adm-list-item) {
+			background: none;
+			padding: 0;
+			:global(.adm-list-item-content) {
+				border: none;
+				padding: 0;
+				:global(.adm-list-item-content-main) {
+					padding: 0;
+					:global(.adm-input-element) {
+						font-size: 16px;
+					}
+					:global(.adm-form-item-feedback-error) {
+						font-size: 12px;
+						margin-top: 0;
+						padding-left: 8px;
+						color: $tRed;
+					}
+				}
+			}
+		}
+		:global(.adm-list-item:nth-child(2)) {
+			margin-top: 10px;
+		}
+	}
+}
+
+.footerBtn{
+	background-color: $tBlack;
+	border-radius: 9999px;
+	color: rgba(255, 255, 255);
+	font-size: 16px;
+	padding: 0 15px;
+	min-height: 51px;
+	width: 100%;
+	font-weight: 800;
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}

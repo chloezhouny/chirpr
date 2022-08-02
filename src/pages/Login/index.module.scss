@@ -1,0 +1,41 @@
+@import "../../main.module.scss";
+
+header {
+	.logo {
+		position: absolute;
+		top: 60px;
+		left: 42px;
+		height: 50px;
+	}
+}
+
+
+.form {
+    padding: 0 30px;
+	margin: 146.5px 13px 0 13px;
+	:global(.adm-list-item-description){
+		display: none;
+	}
+}
+
+.formTitle {
+	composes: formTitle from "../../main.module.scss";
+}
+.formContainer {
+	composes: formContainer from "../../main.module.scss";
+	margin-top: 11px;
+}
+
+.footerBtn{
+	composes: footerBtn from "../../main.module.scss";
+    margin: 90px auto 20px auto;
+}
+.signup {
+	margin: 10px 0 0 42px;
+	a {
+		margin-left: 5px;
+		color: $tBlue;
+		text-decoration: none;
+	}
+}
+

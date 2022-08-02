@@ -12,12 +12,15 @@ const STEP = {
 function Header({ handleClose, step }) {
   return (
     <div className={styles.header}>
+      { handleClose
+      && (
       <img
         src={step === STEP.FIRST ? close : leftArrow}
         alt="close"
         className={step === STEP.FIRST ? styles.close : styles.leftArrow}
         onClick={handleClose}
       />
+      )}
       <img src={logo} alt="twittuer-logo" className={styles.logo} />
       {' '}
     </div>
@@ -25,8 +28,13 @@ function Header({ handleClose, step }) {
 }
 
 Header.propTypes = {
-  handleClose: PropTypes.func.isRequired,
-  step: PropTypes.number.isRequired,
+  handleClose: PropTypes.func,
+  step: PropTypes.string,
+};
+
+Header.defaultProps = {
+  handleClose: null,
+  step: '',
 };
 
 export default Header;
