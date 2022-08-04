@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { useAppContext } from '@utils/context';
 import close from '../../assets/close.svg';
 import leftArrow from '../../assets/left-arrow.png';
 import logo from '../../assets/bird.png';
@@ -9,32 +9,23 @@ const STEP = {
   SECOND: 2,
 };
 
-function Header({ handleClose, step }) {
+function Header() {
+  const [store] = useAppContext();
   return (
     <div className={styles.header}>
-      { handleClose
+      { store.handleClose
       && (
       <img
-        src={step === STEP.FIRST ? close : leftArrow}
+        src={store.step === STEP.FIRST ? close : leftArrow}
         alt="close"
-        className={step === STEP.FIRST ? styles.close : styles.leftArrow}
-        onClick={handleClose}
+        className={store.step === STEP.FIRST ? styles.close : styles.leftArrow}
+        onClick={store.handleClose}
       />
       )}
-      <img src={logo} alt="twittuer-logo" className={styles.logo} />
+      <img src={logo} alt="twittuer-logo" className={!store.step ? styles.logoLogin : styles.logo} />
       {' '}
     </div>
   );
 }
-
-Header.propTypes = {
-  handleClose: PropTypes.func,
-  step: PropTypes.string,
-};
-
-Header.defaultProps = {
-  handleClose: null,
-  step: '',
-};
 
 export default Header;

@@ -6,13 +6,8 @@ import TInput from '@components/TInput';
 import Footer from './Footer';
 import styles from '../index.module.scss';
 
-const STEP = {
-  FIRST: 1,
-  SECOND: 2,
-};
-
 function SignupSecondStep({
-  userInfo, handleSignupSubmit, setStep,
+  userInfo, handleSignupSubmit, setSigupFirstStepStore,
 }) {
   const [form] = Form.useForm();
   const [password, setPassword] = useState();
@@ -20,15 +15,12 @@ function SignupSecondStep({
   const [validPwd, setValidPwd] = useState(true);
   const [validConfirmedPwd, setValidConfirmedPwd] = useState(true);
 
-  const handleClick = () => {
-    setStep(STEP.FIRST);
-  };
+  const handleClick = () => setSigupFirstStepStore();
   const handleSubmit = () => {
     handleSignupSubmit(password);
   };
 
-  const handleValuesChange = async (_, v) => {
-    console.log(v, _);
+  const handleValuesChange = async () => {
     try {
       const validated = await form.validateFields();
       if (validated) {
@@ -82,7 +74,7 @@ function SignupSecondStep({
             </div>
           </div>
           {userInfo.email && (
-            <div className={styles.UserInfo} onClick={handleClick}>
+            <div className={styles.userInfo} onClick={handleClick}>
               <div>Email</div>
               <div>
                 {userInfo.email}
@@ -162,7 +154,7 @@ SignupSecondStep.propTypes = {
     birthDate: PropTypes.string,
   }).isRequired,
   handleSignupSubmit: PropTypes.func.isRequired,
-  setStep: PropTypes.func.isRequired,
+  setSigupFirstStepStore: PropTypes.func.isRequired,
 };
 
 export default SignupSecondStep;

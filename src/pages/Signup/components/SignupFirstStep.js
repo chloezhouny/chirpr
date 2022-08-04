@@ -42,8 +42,7 @@ function SignupFirstStep({ handleNextStep }) {
     }
   };
 
-  const handleValuesChange = async (_, v) => {
-    console.log(v, _);
+  const handleValuesChange = async () => {
     try {
       const validated = await form.validateFields();
       if (validated) {

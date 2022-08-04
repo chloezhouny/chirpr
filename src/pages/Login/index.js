@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Button, Form, Toast,
 } from 'antd-mobile';
+import { Link } from 'react-router-dom';
 import TInput from '@components/TInput';
 import loginAPI from '@utils/LoginAPI';
-import logo from '../../assets/bird.png';
+import { useAppContext } from '@utils/context';
 import styles from './index.module.scss';
 
-function Login() {
+const Login = () => {
   const [form] = Form.useForm();
   const [footerBtnDisabled, setFooterBtnDisabled] = useState(true);
+  const [, setStore] = useAppContext();
+
+  useEffect(() => {
+    setStore({
+      handleClose: null,
+      step: null,
+    });
+  }, []);
 
   const handleValuesChange = async () => {
     try {
@@ -31,7 +40,6 @@ function Login() {
     const values = form.getFieldsValue();
     const res = await loginAPI(values.username, values.password);
     if (res.success && res.data.length > 0) {
-      console.log(res);
       Toast.show({
         content: 'You are successfully logged in',
         position: 'top',
@@ -45,9 +53,6 @@ function Login() {
 
   return (
     <>
-      <header>
-        <img src={logo} alt="twittuer-logo" className={styles.logo} />
-      </header>
       <div className={styles.form}>
         <div className={styles.formTitle}>Sign in to Twittuer</div>
         <Form
@@ -56,10 +61,10 @@ function Login() {
           className={styles.formContainer}
         >
           <Form.Item name="username" rules={[{ required: true, message: '' }]}>
-            <TInput label="Phone, email, or username" valid="1" />
+            <TInput label="Phone, email, or username" valid />
           </Form.Item>
           <Form.Item name="password" rules={[{ required: true, message: '' }]}>
-            <TInput label="Password" type="password" valid="1" />
+            <TInput label="Password" type="password" valid />
           </Form.Item>
         </Form>
         <Button className={styles.footerBtn} onClick={handleSubmit} disabled={footerBtnDisabled}>
@@ -68,10 +73,10 @@ function Login() {
       </div>
       <div className={styles.signup}>
         Don&apos;t have an account?
-        <a href="/" target="_blank">Sign up</a>
+        <Link to="/signup">Sign up</Link>
       </div>
     </>
   );
-}
+};
 
 export default Login;

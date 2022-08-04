@@ -1,14 +1,5 @@
 @import "../../main.module.scss";
 
-header {
-	.logo {
-		position: absolute;
-		top: 60px;
-		left: 42px;
-		height: 50px;
-	}
-}
-
 .form {
 	padding: 0 30px;
 	margin: 146.5px 13px 0 13px;
@@ -38,6 +29,7 @@ header {
 		text-decoration: none;
 	}
 }
+
 :global(.adm-toast-wrap) {
 	:global(.adm-toast-main) {
 		top: 97.2% !important;
