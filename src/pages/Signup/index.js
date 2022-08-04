@@ -33,7 +33,6 @@ function Signup() {
         handleClose: setSigupFirstStepStore,
         step: store.step,
       });
-      console.log(store, 'HERE');
     }
   }, [store.step]);
 
