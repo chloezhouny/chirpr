@@ -2,26 +2,30 @@
 	height: 50px;
 	position: relative;
 	text-align: center;
-}
 
-.close {
-	position: absolute;
-	top: 17px;
-	left: 16px;
-	width: 17px;
-}
+	.close {
+		position: absolute;
+		top: 17px;
+		left: 16px;
+		width: 17px;
+	}
 
-.leftArrow{
-	position: absolute;
-	top: 15px;
-	left: 15px;
-	width: 20px;
-}
+	.leftArrow {
+		position: absolute;
+		top: 15px;
+		left: 15px;
+		width: 20px;
+	}
 
-.logo {
-	// filter: invert(78%) sepia(42%) saturate(2247%) hue-rotate(207deg)
-	// 	brightness(89%) contrast(84%);
-	/*	filter: invert(66%) sepia(11%) saturate(4499%) hue-rotate(208deg) brightness(101%) contrast(98%);*/
-	height: 30px;
-	margin-top: 11px;
+	.logo {
+		height: 35px;
+		margin-top: 12px;
+	}
+
+	.logoLogin {
+		position: absolute;
+		top: 60px;
+		left: 42px;
+		height: 50px;
+	}
 }

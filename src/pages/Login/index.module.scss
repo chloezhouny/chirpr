@@ -1,0 +1,52 @@
+@import "../../main.module.scss";
+
+.form {
+	padding: 0 30px;
+	margin: 146.5px 13px 0 13px;
+	:global(.adm-list-item-description) {
+		display: none;
+	}
+	flex: 1;
+}
+
+.formTitle {
+	composes: formTitle from "../../main.module.scss";
+}
+.formContainer {
+	composes: formContainer from "../../main.module.scss";
+	margin-top: 11px;
+}
+
+.footerBtn {
+	composes: footerBtn from "../../main.module.scss";
+	margin: 90px auto 20px auto;
+}
+.signup {
+	margin: 10px 0 0 42px;
+	a {
+		margin-left: 5px;
+		color: $tBlue;
+		text-decoration: none;
+	}
+}
+
+:global(.adm-toast-wrap) {
+	:global(.adm-toast-main) {
+		top: 97.2% !important;
+		background-color: $tBlue;
+		width: 100%;
+		max-width: 100%;
+		border-radius: 0;
+		padding: 11px 13px;
+		:global(.adm-auto-center) {
+			justify-content: start;
+			:global(.adm-auto-center-content) {
+				font-size: 13px;
+				margin-left: 9px;
+				font-family: $tFont;
+				font-weight: 600;
+				letter-spacing: -0.2px;
+			}
+		}
+	}
+}

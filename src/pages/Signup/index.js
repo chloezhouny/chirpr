@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Toast } from 'antd-mobile';
-import Header from '@components/Header';
-import Show from '@components/Show';
+import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '@utils/context';
 import SignupAPI from '@utils/SignupAPI';
+import Show from '@components/Show';
 import SignupFirstStep from './components/SignupFirstStep';
 import SignupSecondStep from './components/SignupSecondStep';
 
@@ -12,11 +13,34 @@ const STEP = {
 };
 
 function Signup() {
-  const [step, setStep] = useState(STEP.FIRST);
   const [userInfo, setUserInfo] = useState({});
+
+  const [store, setStore] = useAppContext();
+  const navigate = useNavigate();
+  const setSigupFirstStepStore = () => {
+    setStore({
+      handleClose: () => navigate('/login'),
+      step: STEP.FIRST,
+    });
+  };
+
+  useEffect(() => {
+    if (store.step === null || STEP.FIRST) {
+      setSigupFirstStepStore();
+    }
+    if (store.step === STEP.SECOND) {
+      setStore({
+        handleClose: setSigupFirstStepStore,
+        step: store.step,
+      });
+    }
+  }, [store.step]);
+
   const handleNextStep = (data) => {
     setUserInfo(data);
-    setStep(STEP.SECOND);
+    setStore({
+      step: STEP.SECOND,
+    });
   };
 
   const handleSignupSubmit = async (password) => {
@@ -30,21 +54,17 @@ function Signup() {
     Toast.show('Oops, that definitely should not happen.');
   };
 
-  const handleClose = () => {
-    setStep(STEP.FIRST);
-  };
-
   return (
     <div>
-      <Header handleClose={handleClose} step={step} />
-      <Show visible={step === STEP.FIRST}>
+      {/*      <Header handleClose={handleClose} step={step} /> */}
+      <Show visible={store.step === STEP.FIRST}>
         <SignupFirstStep handleNextStep={handleNextStep} />
       </Show>
-      <Show visible={step === STEP.SECOND}>
+      <Show visible={store.step === STEP.SECOND}>
         <SignupSecondStep
           userInfo={userInfo}
+          setSigupFirstStepStore={setSigupFirstStepStore}
           handleSignupSubmit={handleSignupSubmit}
-          setStep={setStep}
         />
       </Show>
     </div>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './index.module.scss';
 
 function TInput({
-  label, value, length, onChange, valid,
+  label, value, length, onChange, valid, type,
 }) {
   const [contentFocused, setContentFocused] = useState(false);
   const [containerFocused, setContainerFocused] = useState(false);
@@ -22,7 +22,8 @@ function TInput({
   };
 
   const handleBlur = () => {
-    if (value && value.length === 0) {
+    console.log(value);
+    if (value === undefined || value.length === 0) {
       setContentFocused(false);
     }
     setContainerFocused(false);
@@ -52,6 +53,7 @@ function TInput({
         onBlur={handleBlur}
         value={value}
         onChange={handleOnChange}
+        type={type}
       />
     </div>
   );
@@ -63,6 +65,7 @@ TInput.propTypes = {
   length: PropTypes.number,
   onChange: PropTypes.func,
   valid: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 TInput.defaultProps = {
@@ -71,6 +74,7 @@ TInput.defaultProps = {
   length: undefined,
   onChange: () => {},
   valid: true,
+  type: '',
 };
 
 export default TInput;

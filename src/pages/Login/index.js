@@ -1,46 +1,82 @@
+import { useState, useEffect } from 'react';
 import {
-  Button, Input, Form, Dialog,
+  Button, Form, Toast,
 } from 'antd-mobile';
+import { Link } from 'react-router-dom';
+import TInput from '@components/TInput';
+import loginAPI from '@utils/LoginAPI';
+import { useAppContext } from '@utils/context';
+import styles from './index.module.scss';
 
-import loginAPI from '../../utils/LoginAPI';
-import './index.css';
-
-function Login() {
+const Login = () => {
   const [form] = Form.useForm();
-  const onSubmit = async () => {
+  const [footerBtnDisabled, setFooterBtnDisabled] = useState(true);
+  const [, setStore] = useAppContext();
+
+  useEffect(() => {
+    setStore({
+      handleClose: null,
+      step: null,
+    });
+  }, []);
+
+  const handleValuesChange = async () => {
+    try {
+      const validated = await form.validateFields();
+      if (validated) {
+        setFooterBtnDisabled(false);
+        return;
+      }
+    } catch (e) {
+      if (e.errorFields.length === 0) {
+        setFooterBtnDisabled(false);
+        return;
+      }
+      setFooterBtnDisabled(true);
+    }
+  };
+
+  const handleSubmit = async () => {
     const values = form.getFieldsValue();
     const res = await loginAPI(values.username, values.password);
-    if (res && res.length > 0) {
-      Dialog.alert({
+    if (res.success && res.data.length > 0) {
+      Toast.show({
         content: 'You are successfully logged in',
+        position: 'top',
       });
       return;
     }
-    Dialog.alert({
-      content: 'Incorrect username or password',
+    Toast.show({
+      content: 'Wrong username or password!',
     });
   };
+
   return (
-    <div className="login">
-      <Form
-        form={form}
-        layout="horizontal"
-        mode="card"
-        footer={(
-          <Button block color="primary" onClick={onSubmit} size="large">
-            Log in
-          </Button>
-   )}
-      >
-        <Form.Item name="username">
-          <Input placeholder="Phone, email, or username" />
-        </Form.Item>
-        <Form.Item name="password">
-          <Input placeholder="Password" clearable type="password" />
-        </Form.Item>
-      </Form>
-    </div>
+    <>
+      <div className={styles.form}>
+        <div className={styles.formTitle}>Sign in to Twittuer</div>
+        <Form
+          form={form}
+          onValuesChange={handleValuesChange}
+          className={styles.formContainer}
+        >
+          <Form.Item name="username" rules={[{ required: true, message: '' }]}>
+            <TInput label="Phone, email, or username" valid />
+          </Form.Item>
+          <Form.Item name="password" rules={[{ required: true, message: '' }]}>
+            <TInput label="Password" type="password" valid />
+          </Form.Item>
+        </Form>
+        <Button className={styles.footerBtn} onClick={handleSubmit} disabled={footerBtnDisabled}>
+          Log in
+        </Button>
+      </div>
+      <div className={styles.signup}>
+        Don&apos;t have an account?
+        <Link to="/signup">Sign up</Link>
+      </div>
+    </>
   );
-}
+};
 
 export default Login;
