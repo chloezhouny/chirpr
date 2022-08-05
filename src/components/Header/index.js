@@ -22,7 +22,7 @@ function Header() {
         onClick={store.handleClose}
       />
       )}
-      <img src={logo} alt="twittuer-logo" className={!store.step ? styles.logoLogin : styles.logo} />
+      <img src={logo} alt="twittuer-logo" className={store.handleClose ? styles.logo : styles.logoLogin} />
       {' '}
     </div>
   );
