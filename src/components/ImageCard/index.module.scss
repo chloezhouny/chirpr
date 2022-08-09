@@ -1,10 +1,16 @@
+@import "../../main.module.scss";
+
 .container {
 	height: 170px;
 	margin-top: 11px;
 	padding: 0 2px 0 0;
+
+	:global(.adm-mask) {
+		background-color: $tLightGray !important;
+	}
 	.img {
 		position: absolute;
-	    width: 50%;
+		width: 50%;
 	}
 	.wrapper {
 		position: relative;
@@ -12,16 +18,16 @@
 		height: 170px;
 	}
 	.wrapper1 {
-	  :global(.img0) {
-	  	left: 0;
-		width: 100%;
-		object-fit: cover;
-		 border-radius: 15px;
-	  }
+		:global(.img0) {
+			left: 0;
+			width: 100%;
+			object-fit: cover;
+			border-radius: 15px;
+		}
 	}
 
 	.wrapper2 {
-	   overflow: hidden;
+		overflow: hidden;
 		:global(.img0) {
 			left: 0;
 			height: 170px;
@@ -34,7 +40,7 @@
 		}
 	}
 	.wrapper3 {
-	    overflow: hidden;
+		overflow: hidden;
 		:global(.img0) {
 			left: 0;
 			height: 170px;
@@ -55,7 +61,7 @@
 		}
 	}
 	.wrapper4 {
-			   overflow: hidden;
+		overflow: hidden;
 		:global(.img0) {
 			left: 0;
 			height: 85px;

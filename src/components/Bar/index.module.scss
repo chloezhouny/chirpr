@@ -10,7 +10,36 @@
 	}
 }
 
+.containerBottom {
+	position: fixed;
+	height: 46px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+	padding: 0 15px 3px 8px;
+	:global(.adm-tab-bar-item){
+		padding-bottom: 6px;
+	}
+	:global(.adm-tab-bar-item:nth-child(2)) {
+		padding-left: 13px;
+		padding-right: 3px;
+	}
+	:global(.adm-tab-bar-item:nth-child(3)) {
+		padding-left: 16px;
+		padding-right: 0;
+	}
+
+   .icon {
+   	height: 21px;
+   }
+   .count {
+   	line-height: 19px;
+   }
+}
+
 .icon {
+	font-family: $tFont;
 	height: 17px;
 	vertical-align: bottom;
 }
