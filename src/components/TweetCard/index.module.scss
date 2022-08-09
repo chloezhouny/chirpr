@@ -1,0 +1,43 @@
+@import "../../main.module.scss";
+
+.container {
+	border-bottom: 1px solid #eee;
+	padding: 11px 15px 0 15px;
+}
+
+.avatarContainer {
+	width: 50px;
+	display: inline-block;
+	vertical-align: top;
+	box-sizing: border-box;
+	padding-left: 1px;
+	.avatar {
+		height: 46px;
+		border-radius: 50%;
+	}
+}
+
+.contentContainer {
+	width: calc(100% - 50px);
+	display: inline-block;
+	padding: 1.5px 0 0 8px;
+	box-sizing: border-box;
+	font-family: $tFont;
+	.header {
+		height: 20px;
+		font-size: 14px;
+		margin-bottom: 1px;
+		.name {
+			color: $tBlack;
+			font-size: 14px;
+		    font-family: $tFontBold;
+			margin-right: 4px;
+		}
+	}
+	.text {
+		font-size: 14px;
+		color: $tBlack;
+		font-weight: 400;
+		line-height: 19px;
+	}
+}

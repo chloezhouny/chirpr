@@ -3,16 +3,36 @@ $tBlack: rgb(15, 20, 25);
 $tGray: rgb(83, 100, 113);
 $tLightGray: rgb(207, 217, 222);
 $tRed: rgb(244, 33, 46);
-$tFont: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$tFont: tfont, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$tFontMedium: tfontmedium, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$tFontBold: tfontbold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+@font-face {
+	font-family: 'tfont';
+	src: url("./assets/chirp-regular-web.woff") format('woff');
+}
+
+@font-face {
+    font-family: "tfontbold";
+    src: url("./assets/chirp-bold-web.woff") format('woff');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "tfontmedium";
+    src: url("./assets/chirp-medium-web.woff") format('woff');
+}
+
+@font-face {
+    font-family: "tfontheavy";
+    src: url("./assets/chirp-heavy-web.woff") format('woff');
+}
+
 
 :global(.adm-input) {
 	--placeholder-color: $tGray;
 	opacity: 0.8;
-}
-
-.tFont {
-	font-family: $tFont;
-	letter-spacing: -0.2px;
 }
 
 .input {
