@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TabBar } from 'antd-mobile';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import replyIcon from '@assets/reply.svg';
 import retweetIcon from '@assets/retweet.svg';
 import likeIcon from '@assets/like.svg';
@@ -18,11 +19,13 @@ const numFormatter = (num) => {
   return num.toLocaleString('en');
 };
 
-const getTabs = ({ replyCnt, retweetCnt, likeCnt }) => [
+const getTabs = ({
+  replyCnt, retweetCnt, likeCnt, nav, id,
+}) => [
   {
     key: 'reply',
     icon: (
-      <div>
+      <div onClick={() => nav(`/reply/${id}`)}>
         <img className={styles.icon} src={replyIcon} alt="" />
         {replyCnt > 0 && (
           <span className={styles.count}>{numFormatter(replyCnt)}</span>
@@ -61,9 +64,11 @@ const getTabs = ({ replyCnt, retweetCnt, likeCnt }) => [
 ];
 
 const Bar = ({
-  isBottom, replyCnt, retweetCnt, likeCnt,
+  id, isBottom, replyCnt, retweetCnt, likeCnt,
 }) => {
   const [activeKey, setActiveKey] = useState();
+  const nav = useNavigate();
+
   const handleTabItemChange = (key) => {
     setActiveKey(key);
   };
@@ -75,7 +80,9 @@ const Bar = ({
       })}
     >
       <TabBar activeKey={activeKey} onChange={handleTabItemChange}>
-        {getTabs({ replyCnt, retweetCnt, likeCnt }).map((item) => (
+        {getTabs({
+          replyCnt, retweetCnt, likeCnt, nav, id,
+        }).map((item) => (
           <TabBar.Item key={item.key} icon={item.icon} />
         ))}
       </TabBar>
@@ -84,6 +91,7 @@ const Bar = ({
 };
 
 Bar.propTypes = {
+  id: PropTypes.number.isRequired,
   isBottom: PropTypes.bool,
   replyCnt: PropTypes.number.isRequired,
   retweetCnt: PropTypes.number.isRequired,

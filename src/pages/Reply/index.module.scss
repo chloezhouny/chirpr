@@ -1,0 +1,67 @@
+@import "../../index.scss";
+
+.container {
+	:global(.adm-steps-vertical) {
+		padding: 12px 15px;
+		:global(.adm-step .adm-step-indicator) {
+			top: 18px;
+			left: -2px;
+			width: 50px;
+			.avatar {
+				height: 46px;
+				border-radius: 50%;
+			}
+		}
+		:global(.adm-step .adm-step-indicator::after){
+			width: 2px;
+			background-color: $tLightGray;
+		}
+		:global(.adm-step-content) {
+			width: calc(100% - 50px);
+			display: inline-block;
+			padding: 1.5px 0 0 7px;
+			box-sizing: border-box;
+			font-family: $tFont;
+			.header {
+				height: 20px;
+				font-size: 14px;
+				margin-bottom: 2.5px;
+				color: $tGray;
+				.name {
+					color: $tBlack;
+					font-size: 14px;
+					font-family: $tFontBold;
+					margin-right: 5px;
+				}
+			}
+			.text {
+				font-size: 14px;
+				color: $tBlack;
+				line-height: 19px;
+				overflow-wrap: break-word;
+			}
+			:global(.adm-step-description) {
+				padding-top: 15px;
+				font-size: 14px;
+				color: $tGray;
+				:global(span) {
+					color: $tBlue;
+					margin-left: -4px;
+				}
+			}
+		}
+		:global(.adm-step-status-wait){
+			margin-top: 13px;
+			.avatar {
+				margin-top: 8px;
+			}
+			:global(.adm-text-area) {
+				margin-top: 8px;
+				padding-top: 7px;
+				padding-left: 2px;
+				height: 114px;
+			}
+		}
+
+	}
+}

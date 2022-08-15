@@ -1,4 +1,4 @@
-@import "../../main.module.scss";
+@import "../../index.scss";
 
 .container {
 	:global(.adm-tab-bar-wrap) {
@@ -18,7 +18,7 @@
 	width: 100%;
 	z-index: 1000;
 	padding: 0 15px 3px 8px;
-	:global(.adm-tab-bar-item){
+	:global(.adm-tab-bar-item) {
 		padding-bottom: 6px;
 	}
 	:global(.adm-tab-bar-item:nth-child(2)) {
@@ -30,12 +30,12 @@
 		padding-right: 0;
 	}
 
-   .icon {
-   	height: 21px;
-   }
-   .count {
-   	line-height: 19px;
-   }
+	.icon {
+		height: 21px;
+	}
+	.count {
+		line-height: 19px;
+	}
 }
 
 .icon {

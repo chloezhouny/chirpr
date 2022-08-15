@@ -12,8 +12,15 @@ export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [store, setStore] = useState(defaultStore);
+  const updateStore = (newData) => {
+    setStore((prevStore) => ({
+      ...prevStore,
+      ...newData,
+    }));
+  };
   const value = useMemo(() => ({
-    store, setStore,
+    store,
+    updateStore,
   }), [store]);
   return (
     <AppContext.Provider value={value}>
@@ -27,6 +34,6 @@ AppProvider.propTypes = {
 };
 
 export const useAppContext = () => {
-  const { store, setStore } = useContext(AppContext);
-  return [store, setStore];
+  const { store, updateStore } = useContext(AppContext);
+  return [store, updateStore];
 };

@@ -1,39 +1,4 @@
-$tBlue: rgb(29, 155, 240);
-$tBlack: rgb(15, 20, 25);
-$tGray: rgb(83, 100, 113);
-$tLightGray: rgb(207, 217, 222);
-$tRed: rgb(244, 33, 46);
-$tFont: tfont, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-$tFontMedium: tfontmedium, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-$tFontBold: tfontbold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-$tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-@font-face {
-	font-family: 'tfont';
-	src: url("./assets/chirp-regular-web.woff") format('woff');
-}
-
-@font-face {
-    font-family: "tfontbold";
-    src: url("./assets/chirp-bold-web.woff") format('woff');
-    font-weight: bold;
-}
-
-@font-face {
-    font-family: "tfontmedium";
-    src: url("./assets/chirp-medium-web.woff") format('woff');
-}
-
-@font-face {
-    font-family: "tfontheavy";
-    src: url("./assets/chirp-heavy-web.woff") format('woff');
-}
-
-
-:global(.adm-input) {
-	--placeholder-color: $tGray;
-	opacity: 0.8;
-}
+@import "./index.scss";
 
 .input {
 	border: solid 1px $tLightGray;
@@ -41,9 +6,9 @@ $tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 	padding: 10px 9px 10px 8px;
 	box-sizing: border-box;
 	margin: 12px 0 0 0;
-	color: $tGray;
 	font-size: 16px;
 	font-weight: 450;
+	font-family: $tFont;
 }
 
 .mediumInput {
@@ -62,7 +27,8 @@ $tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 	font-weight: 700;
 	height: 68px;
 	line-height: 68px;
-	font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Helvetica, Arial, sans-serif;
 }
 
 .formContainer {
@@ -79,9 +45,11 @@ $tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 					padding: 0;
 					:global(.adm-input-element) {
 						font-size: 16px;
+						font-family: $tFont;
 					}
 					:global(.adm-form-item-feedback-error) {
 						font-size: 12px;
+						font-family: $tFont;
 						margin-top: 0;
 						padding-left: 8px;
 						color: $tRed;
@@ -95,7 +63,7 @@ $tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 	}
 }
 
-.footerBtn{
+.footerBtn {
 	background-color: $tBlack;
 	border-radius: 9999px;
 	color: rgba(255, 255, 255);
@@ -104,8 +72,9 @@ $tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 	min-height: 51px;
 	width: 100%;
 	font-weight: 800;
-    font-family: $tFont;
+	font-family: $tFont;
 }
 
-
-
+.icon {
+	height: 24.5px;
+}

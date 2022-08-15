@@ -1,5 +1,7 @@
 {
+	"/api/replys": "/replys",
 	"/api/accounts/signup": "/user",
+	"/api/users/:id": "/user/:id",
 	"/api/login/:username/:password": "/user/?username=:username&password:password"
 }
 

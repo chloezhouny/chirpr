@@ -3,7 +3,13 @@ import TweetCard from '@components/TweetCard';
 // import styles from './index.module.scss';
 
 const Tweets = () => (
-  <div><TweetCard /></div>
+  <div>
+    <TweetCard />
+    <TweetCard />
+    <TweetCard />
+    <TweetCard />
+    <TweetCard />
+  </div>
 );
 
 export default Tweets;

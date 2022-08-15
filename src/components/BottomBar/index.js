@@ -1,55 +1,41 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { TabBar } from 'antd-mobile';
-// import PropTypes from 'prop-types';
-import homeIcon from '@assets/home.svg';
-import exploreIcon from '@assets/explore.svg';
-import notificationsIcon from '@assets/notifications.svg';
-import messagesIcon from '@assets/messages.svg';
+import { useAppContext } from '@utils/context';
+import { useCurTab, useGoTo } from '@utils/hooks';
+import { tabs, getTabByKey } from '@utils/constants';
 import styles from './index.module.scss';
 
-const tabs = [
-  {
-    key: 'home',
-    title: 'Home',
-    link: 'home',
-    icon: <img className={styles.icon} src={homeIcon} alt="" />,
-  },
-  {
-    key: 'explore',
-    link: '/',
-    icon: <img className={styles.icon} src={exploreIcon} alt="" />,
-  },
-  {
-    key: 'notifications',
-    link: '/',
-    icon: <img className={styles.icon} src={notificationsIcon} alt="" />,
-  },
-  {
-    key: 'messages',
-    link: '/',
-    icon: <img className={styles.icon} src={messagesIcon} alt="" />,
-  },
-
-];
-
 const BottomBar = () => {
-  const [activeKey, setActiveKey] = useState();
+  const [store, setStore] = useAppContext();
+  const curTab = useCurTab();
+  const goTo = useGoTo();
+
+  useEffect(() => {
+    if (curTab) {
+      setStore({
+        title: curTab.title,
+      });
+    }
+  }, []);
   const handleTabItemChange = (key) => {
-    setActiveKey(key);
+    const newTab = getTabByKey(key);
+    setStore({ title: newTab.title });
+    console.log(store);
+    goTo(key);
   };
+
+  if (curTab.hideAppHeader) {
+    return null;
+  }
   return (
     <div className={styles.container}>
-      <TabBar activeKey={activeKey} onChange={handleTabItemChange}>
+      <TabBar onChange={handleTabItemChange}>
         {tabs.map((item) => (
-          <TabBar.Item key={item.key} icon={item.icon} />
+          item.isMenu && <TabBar.Item key={item.key} icon={item.icon} />
         ))}
       </TabBar>
     </div>
   );
-};
-
-BottomBar.propTypes = {
-
 };
 
 export default BottomBar;

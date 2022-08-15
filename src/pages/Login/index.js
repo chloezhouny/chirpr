@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import {
   Button, Form, Toast,
 } from 'antd-mobile';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import TInput from '@components/TInput';
-import loginAPI from '@utils/LoginAPI';
+import { LoginAPI } from '@utils/LoginAPI';
 import { useAppContext } from '@utils/context';
 import styles from './index.module.scss';
 
@@ -12,6 +13,7 @@ const Login = () => {
   const [form] = Form.useForm();
   const [footerBtnDisabled, setFooterBtnDisabled] = useState(true);
   const [, setStore] = useAppContext();
+  const nav = useNavigate();
 
   useEffect(() => {
     setStore({
@@ -38,12 +40,14 @@ const Login = () => {
 
   const handleSubmit = async () => {
     const values = form.getFieldsValue();
-    const res = await loginAPI(values.username, values.password);
+    const res = await LoginAPI.login(values.username, values.password);
     if (res.success && res.data.length > 0) {
       Toast.show({
         content: 'You are successfully logged in',
         position: 'top',
       });
+      Cookies.set('userId', res.data[0].id);
+      nav('/home');
       return;
     }
     Toast.show({

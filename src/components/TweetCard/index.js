@@ -1,4 +1,3 @@
-import React from 'react';
 import moment from 'moment';
 import ImageCard from '@components/ImageCard';
 import Bar from '@components/Bar';
@@ -60,7 +59,7 @@ const tweet = {
     'https://pbs.twimg.com/media/FZdKy4gXoAE9IVY?format=jpg&name=large',
     'https://pbs.twimg.com/media/FX9uuc8UsAEVJ8a?format=jpg&name=large',
     'https://pbs.twimg.com/media/FX9uwREVEAA3tN3?format=jpg&name=large',
-    'https://pbs.twimg.com/media/FZlDCTGUEAAZMUE?format=jpg&name=900x900',
+    'https://pbs.twimg.com/media/FZwZBv7VEAAL_Kc?format=jpg&name=large',
   ],
 };
 
@@ -92,6 +91,7 @@ const TweetCard = () => (
       </div>
       <div className={styles.bar}>
         <Bar
+          id={tweet.id}
           replyCnt={tweet.comments_count}
           retweetCnt={tweet.retweet_count}
           likeCnt={tweet.likes_count}
