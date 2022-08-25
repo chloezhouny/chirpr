@@ -18,13 +18,19 @@ function Header({
   const goTo = useGoTo();
   const curTab = useCurTab();
   const result = [];
+  console.log(store);
 
   // header for twittuer member pages
   if (store.user) {
-    if (curTab.hideAppHeader) {
+    if (curTab?.hideAppHeader) {
       result.push(
         <div key="contentPageHeader" className={styles.contentPageHeader}>
           <img src={leftArrow} alt="" onClick={() => goTo()} className={styles.leftArrow} />
+          {curTab.title && (
+          <span className={styles.title}>
+            {curTab.title}
+          </span>
+          )}
           {children}
         </div>,
       );

@@ -57,7 +57,7 @@ const tweet = {
     },
   ],
   created_at: '2022-08-05T11:56:01',
-  text: 'Hustling to get Stargship Booster 7 back to pad to test outer ring of 20 engines',
+  text: 'Hustling to get Starship Booster 7 back to pad to test outer ring of 20 engines',
   likes: [],
   likes_count: 61600,
   comments_count: 3966,

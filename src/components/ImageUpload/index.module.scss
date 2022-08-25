@@ -1,0 +1,17 @@
+@import '../../index.scss';
+
+.uploadInput {
+	position: absolute;
+	opacity: 0;
+	z-index: 1;
+	width: 19px;
+	height: 19px;
+}
+.imageUploadWrapper {
+	width: 19px;
+	height: 19px;
+}
+.imageUploadIcon {
+	fill: $tBlue;
+	width: 100%;
+}

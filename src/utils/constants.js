@@ -1,3 +1,4 @@
+import { matchPath } from 'react-router-dom';
 import homeIcon from '@assets/home.svg';
 import exploreIcon from '@assets/explore.svg';
 import notificationsIcon from '@assets/notifications.svg';
@@ -8,9 +9,15 @@ export const tabs = [
   {
     key: 'home',
     title: 'Home',
-    link: '/home',
+    link: '/',
     isMenu: true,
     icon: <img className={styles.icon} src={homeIcon} alt="" />,
+  },
+  {
+    key: 'tweet',
+    title: 'Tweet',
+    link: '/tweet/:id',
+    hideAppHeader: true,
   },
   {
     key: 'explore',
@@ -34,15 +41,19 @@ export const tabs = [
     icon: <img className={styles.icon} src={messagesIcon} alt="" />,
   },
   {
+    key: 'composeTweet',
+    link: '/compose/tweet',
+    hideAppHeader: true,
+  },
+  {
     key: 'reply',
-    title: 'Reply',
-    link: '/reply',
+    link: '/reply/:id',
     hideAppHeader: true,
   },
 ];
 
 export const getTabByKey = (key) => tabs.find((item) => item.key === key);
 
-export const getTabByLink = (link) => tabs.find((item) => link.indexOf(item.link) > -1);
+export const getTabByLink = (link) => tabs.find((item) => matchPath(item.link, link));
 
 export const hasTabs = (link) => tabs.some((item) => item.link === link);

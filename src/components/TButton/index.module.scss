@@ -1,19 +1,21 @@
 @import "../../index.scss";
 
-.button {
-	min-height: 32px;
-	min-width: 68px;
-	margin: 9px 14px;
-	line-height: 15px;
-	padding: 0 15px;
-	border-radius: 9999px;
-	background-color: rgb(29, 155, 240);
-	color: #fff;
-	font-size: 12.7px;
-	font-family: $tFontHeavy;
-	float: right;
-}
+.container {
+	.button {
+		min-height: 32px;
+		min-width: 68px;
+		margin: 9px 14px;
+		line-height: 15px;
+		padding: 0 15px;
+		border-radius: 9999px;
+		background-color: rgb(29, 155, 240);
+		color: #fff;
+		font-size: 12.7px;
+		font-family: $tFontHeavy;
+		float: right;
+	}
 
-:global(.adm-button-disabled){
-	opacity: 0.5;
+	:global(.adm-button-disabled) {
+		opacity: 0.5;
+	}
 }

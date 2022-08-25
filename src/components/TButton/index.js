@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './index.module.scss';
 
 const TButton = ({ disabled, handleOnClick, children }) => (
-  <div>
+  <div className={styles.container}>
     <Button
       disabled={disabled}
       className={styles.button}

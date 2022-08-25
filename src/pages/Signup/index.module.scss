@@ -44,7 +44,21 @@
 	margin-bottom: 1px;
 }
 
-.footer{
+.container {
+	:global(.adm-button) {
+		color: rgb(255, 255, 255);
+		background-color: $tBlack;
+		border: none;
+		border-radius: 9999px;
+		font-size: 16px;
+		padding: 0 15px;
+		min-height: 51px;
+		width: 100%;
+		font-family: $tFontHeavy;
+	}
+}
+
+.footer {
 	box-sizing: border-box;
 	position: fixed;
 	bottom: 23px;
@@ -55,7 +69,6 @@
 }
 
 .footerBtnDisabled {
-	composes: footerBtn from "../../main.module.scss";
 	margin: 0 auto;
 	opacity: 0.5;
 }
@@ -72,15 +85,15 @@
 .userInfo {
 	height: 40px;
 	border: solid 1px $tLightGray;
-    border-radius: 5px;
-    padding: 9px 0 5px 8px;
-    margin: 10px 0;
+	border-radius: 5px;
+	padding: 9px 0 5px 8px;
+	margin: 10px 0;
 	font-weight: 450;
-	:global(div:first-child){
+	:global(div:first-child) {
 		color: $tGray;
 		font-size: 13px;
 	}
-	:global(div:last-child){
+	:global(div:last-child) {
 		color: $tBlack;
 		font-size: 16px;
 		font-family: "Helvetica";

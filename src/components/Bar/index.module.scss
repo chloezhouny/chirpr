@@ -50,3 +50,48 @@
 	color: $tGray;
 	margin-left: 8px;
 }
+
+.likedCount {	
+	composes: count;
+	color: #f91880;
+}
+
+.retweetedCount {
+	composes: count;
+	color: #00ba7c;
+}
+
+.actionSheetContainer {
+	:global(.adm-action-sheet-button-item-wrapper) {
+		border: none;
+		:global(.adm-action-sheet-button-item) {
+			padding: 11px 15px;
+		}
+	}
+	.copyLinkBtn {
+		display: flex;
+		flex-direction: row;
+		min-height: 19px;
+		line-height: 19px;
+		font-size: 14px;
+		text-align: left;
+		color: $tBlack;
+		.linkIcon {
+			margin-right: 11px;
+			svg {
+				fill: $tGray;
+				height: 17.5px;
+			}
+		}
+	}
+	.cancelShareBtn {
+		font-size: 14px;
+		font-family: $tFontBold;
+		line-height: 40px;
+		min-height: 40px;
+		border: solid 1px $tLightGray;
+		border-radius: 9999px;
+		padding: auto 23px;
+		box-sizing: border-box;
+	}
+}

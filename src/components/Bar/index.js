@@ -1,77 +1,76 @@
 import { useState } from 'react';
-import { TabBar } from 'antd-mobile';
+import { TabBar, ActionSheet, Toast } from 'antd-mobile';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import replyIcon from '@assets/reply.svg';
-import retweetIcon from '@assets/retweet.svg';
-import likeIcon from '@assets/like.svg';
-import shareIcon from '@assets/share.svg';
+import { ReplyAPI } from '@utils/ReplyAPI';
+import {
+  TAB_KEYS, getTabs, ACTION_KEYS, ACTIONS, BAR_TYPE_KEYS,
+} from './constants';
 import styles from './index.module.scss';
 
-const numFormatter = (num) => {
-  if (num > 9999 && num < 1000000) {
-    return `${(num / 1000).toFixed(1)}K`.toLocaleString('en');
-  }
-  if (num > 1000000) {
-    return `${(num / 1000000).toFixed(1)}M`.toLocaleString('en');
-  }
-  return num.toLocaleString('en');
-};
-
-const getTabs = ({
-  replyCnt, retweetCnt, likeCnt, nav, id,
-}) => [
-  {
-    key: 'reply',
-    icon: (
-      <div onClick={() => nav(`/reply/${id}`)}>
-        <img className={styles.icon} src={replyIcon} alt="" />
-        {replyCnt > 0 && (
-          <span className={styles.count}>{numFormatter(replyCnt)}</span>
-        )}
-      </div>
-    ),
-  },
-  {
-    key: 'retweet',
-    icon: (
-      <div>
-        <img className={styles.icon} src={retweetIcon} alt="" />
-        {retweetCnt > 0 && (
-          <span className={styles.count}>
-            {numFormatter(retweetCnt)}
-          </span>
-        )}
-      </div>
-    ),
-  },
-  {
-    key: 'like',
-    icon: (
-      <div>
-        <img className={styles.icon} src={likeIcon} alt="" />
-        {likeCnt > 0 && (
-          <span className={styles.count}>{numFormatter(likeCnt)}</span>
-        )}
-      </div>
-    ),
-  },
-  {
-    key: 'share',
-    icon: <img className={styles.icon} src={shareIcon} alt="" />,
-  },
-];
-
 const Bar = ({
-  id, isBottom, replyCnt, retweetCnt, likeCnt,
+  id, isBottom, replyCnt, retweetCnt, likeCnt, likeOnly, type,
 }) => {
   const [activeKey, setActiveKey] = useState();
+  const [visible, setVisible] = useState(false);
+  const [retweeted, setRetweeted] = useState(false);
+  const [liked, setLiked] = useState(false);
   const nav = useNavigate();
 
+  const handleTabClick = (e) => {
+    const { key } = e.target.dataset;
+    if (key === TAB_KEYS.REPLY) {
+      nav(`/reply/${id}`);
+    }
+    if (key === TAB_KEYS.RETWEET) {
+      if (retweeted) {
+        setRetweeted(false);
+        return;
+      }
+      Toast.show('Retweeted.');
+      setRetweeted(true);
+    }
+    if (key === TAB_KEYS.SHARE) {
+      setVisible(true);
+    }
+    if (key === TAB_KEYS.LIKE) {
+      if (liked) {
+        ReplyAPI.deleteLike({
+          content_type: type,
+          object_id: id,
+        }).then((res) => {
+          if (res.success) {
+            setLiked(false);
+          }
+        });
+        return;
+      }
+      ReplyAPI.createLike({
+        content_type: type,
+        object_id: id,
+      }).then((res) => {
+        if (res.success) {
+          Toast.show('Keep it up! The more Tweets you like, the better your timeline will be.');
+          setLiked(true);
+        }
+      });
+    }
+  };
   const handleTabItemChange = (key) => {
     setActiveKey(key);
   };
+
+  const handleAction = (e) => {
+    if (e.key === ACTION_KEYS.COPY) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(`${window.location.origin}/tweet/${id}`);
+        Toast.show('Copied to clipboard');
+      }
+    }
+    setVisible(false);
+  };
+
   return (
     <div
       className={classNames({
@@ -81,11 +80,24 @@ const Bar = ({
     >
       <TabBar activeKey={activeKey} onChange={handleTabItemChange}>
         {getTabs({
-          replyCnt, retweetCnt, likeCnt, nav, id,
+          handleTabClick,
+          replyCnt,
+          retweetCnt,
+          likeCnt,
+          retweeted,
+          likeOnly,
+          liked,
         }).map((item) => (
           <TabBar.Item key={item.key} icon={item.icon} />
         ))}
       </TabBar>
+      <ActionSheet
+        className={styles.actionSheetContainer}
+        visible={visible}
+        actions={ACTIONS}
+        onClose={() => setVisible(false)}
+        onAction={handleAction}
+      />
     </div>
   );
 };
@@ -93,13 +105,19 @@ const Bar = ({
 Bar.propTypes = {
   id: PropTypes.number.isRequired,
   isBottom: PropTypes.bool,
-  replyCnt: PropTypes.number.isRequired,
-  retweetCnt: PropTypes.number.isRequired,
+  likeOnly: PropTypes.bool,
+  replyCnt: PropTypes.number,
+  retweetCnt: PropTypes.number,
   likeCnt: PropTypes.number.isRequired,
+  type: PropTypes.oneOf([BAR_TYPE_KEYS.REPLY, BAR_TYPE_KEYS.TWEET]),
 };
 
 Bar.defaultProps = {
   isBottom: false,
+  likeOnly: false,
+  replyCnt: undefined,
+  retweetCnt: undefined,
+  type: '',
 };
 
 export default Bar;

@@ -1,5 +1,8 @@
 {
+	"/api/tweets": "/tweets",
 	"/api/replys": "/replys",
+	"/api/likes": "/likes",
+	"/api/likes/delete": "/likes",
 	"/api/accounts/signup": "/user",
 	"/api/users/:id": "/user/:id",
 	"/api/login/:username/:password": "/user/?username=:username&password:password"

@@ -22,7 +22,6 @@ function TInput({
   };
 
   const handleBlur = () => {
-    console.log(value);
     if (value === undefined || value.length === 0) {
       setContentFocused(false);
     }

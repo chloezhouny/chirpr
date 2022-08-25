@@ -6,6 +6,7 @@ import { useCurTab } from '@utils/hooks';
 import { LoginAPI } from '@utils/LoginAPI';
 import Header from '@components/Header';
 import BottomBar from '@components/BottomBar';
+import ComposeTweetButton from '@components/ComposeTweetButton';
 
 const Home = () => {
   const [, setStore] = useAppContext();
@@ -34,11 +35,17 @@ const Home = () => {
     };
     init();
   }, []);
+  const handleComposeTweetOnClick = () => nav('/compose/tweet');
+
   return (
     <>
-      {curTab && !curTab.hideAppHeader && <Header />}
+      {(!curTab || (curTab && !curTab.hideAppHeader)) && <Header /> }
       <Outlet />
-      <BottomBar />
+      {curTab && !curTab.hideAppHeader && <BottomBar />}
+      {
+        curTab && !curTab.hideAppHeader
+        && <ComposeTweetButton handleComposeTweetOnClick={handleComposeTweetOnClick} />
+      }
     </>
   );
 };

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Image, ImageViewer } from 'antd-mobile';
 import classNames from 'classnames';
 import Bar from '@components/Bar';
+import { BAR_TYPE_KEYS } from '@components/Bar/constants';
 import styles from './index.module.scss';
 
 const ImageCard = ({
@@ -57,6 +58,7 @@ const ImageCard = ({
           replyCnt={replyCnt}
           retweetCnt={retweetCnt}
           likeCnt={likeCnt}
+          type={BAR_TYPE_KEYS.TWEET}
         />
       )}
     </div>

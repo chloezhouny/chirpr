@@ -64,7 +64,10 @@ const Login = () => {
           onValuesChange={handleValuesChange}
           className={styles.formContainer}
         >
-          <Form.Item name="username" rules={[{ required: true, message: '' }]}>
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: '' }]}
+          >
             <TInput label="Phone, email, or username" valid />
           </Form.Item>
           <Form.Item name="password" rules={[{ required: true, message: '' }]}>

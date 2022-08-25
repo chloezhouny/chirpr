@@ -1,8 +1,10 @@
+import moment from 'moment';
+import { useState, useEffect } from 'react';
+import Header from '@components/Header';
 import ImageCard from '@components/ImageCard';
+import CommentCard from '@components/CommentCard';
 import Bar from '@components/Bar';
 import { BAR_TYPE_KEYS } from '@components/Bar/constants';
-import { useGoTo } from '@utils/hooks';
-import { timeDiff } from '@utils';
 import styles from './index.module.scss';
 
 const tweet = {
@@ -20,12 +22,12 @@ const tweet = {
       tweet_id: 1,
       user: {
         id: 1,
-        name: 'Crpto Insights',
+        name: 'Crypto Insights',
         username: 'CryptoInsightsX',
         profile_image_url:
           'https://pbs.twimg.com/profile_images/1510983419588919296/bvtUUkHo_400x400.jpg',
       },
-      content: 'Hope you will make crypto market great again Elon',
+      text: 'Hope you will make crypto market great again Elon',
       created_at: '2022-08-05T18:43:02.662052Z',
       likes_count: 5,
       comments_count: 5,
@@ -65,47 +67,61 @@ const tweet = {
   ],
 };
 
-const TweetCard = () => {
-  const goTo = useGoTo();
-
+const Tweet = () => {
+  const [data, setData] = useState(tweet);
+  useEffect(() => {
+    setData(tweet);
+  }, []);
   return (
-    <div className={styles.container}>
-      <div className={styles.avatarContainer}>
-        <img
-          src={tweet.user.profile_image_url}
-          alt="avatar"
-          className={styles.avatar}
-        />
-      </div>
-      <div className={styles.contentContainer}>
-        <div className={styles.header}>
-          <span className={styles.name}>{tweet.user.name}</span>
-          @
-          <span className={styles.username}>{tweet.user.username}</span>
-        &nbsp;&#183;&nbsp;
-          {timeDiff(tweet.created_at)}
+    <>
+      <Header />
+      <div className={styles.container}>
+        <div className={styles.contentContainer}>
+          <div className={styles.header}>
+            <div className={styles.avatarContainer}>
+              <img
+                className={styles.avatar}
+                src={data.user.profile_image_url}
+                alt=""
+              />
+            </div>
+            <div className={styles.nameContainer}>
+              <div className={styles.name}>{data.user.name}</div>
+              <div className={styles.username}>
+                @
+                {data.user.username}
+              </div>
+            </div>
+          </div>
+          <div className={styles.text}>
+            {data.text}
+          </div>
+          <div className={styles.photo}>
+            <ImageCard
+              imgs={data.media_urls}
+              replyCnt={data.comments_count}
+              retweetCnt={data.retweet_count}
+              likeCnt={data.likes_count}
+            />
+          </div>
         </div>
-        <div className={styles.text} onClick={() => goTo('tweet', { id: tweet.id })}>{tweet.text}</div>
-        <div className={styles.photo}>
-          <ImageCard
-            imgs={tweet.media_urls}
-            replyCnt={tweet.comments_count}
-            retweetCnt={tweet.retweet_count}
-            likeCnt={tweet.likes_count}
-          />
+        <div className={styles.time}>
+          {`${moment(data.created_at).format('hh:mm A · MMM Do, YYYY')}`}
+         &nbsp;&#183;&nbsp; Twittuer for iPhone
         </div>
         <div className={styles.bar}>
           <Bar
-            id={tweet.id}
-            replyCnt={tweet.comments_count}
-            retweetCnt={tweet.retweet_count}
-            likeCnt={tweet.likes_count}
+            id={data.id}
+            replyCnt={data.comments_count}
+            retweetCnt={data.retweet_count}
+            likeCnt={data.likes_count}
             type={BAR_TYPE_KEYS.TWEET}
           />
         </div>
       </div>
-    </div>
+      {data.comments.map((item) => (<CommentCard key={item.id} data={item} />))}
+    </>
   );
 };
 
-export default TweetCard;
+export default Tweet;

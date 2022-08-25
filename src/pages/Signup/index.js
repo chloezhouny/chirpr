@@ -6,6 +6,7 @@ import SignupAPI from '@utils/SignupAPI';
 import Show from '@components/Show';
 import SignupFirstStep from './components/SignupFirstStep';
 import SignupSecondStep from './components/SignupSecondStep';
+import styles from './index.module.scss';
 
 const STEP = {
   FIRST: 1,
@@ -55,7 +56,7 @@ function Signup() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {/*      <Header handleClose={handleClose} step={step} /> */}
       <Show visible={store.step === STEP.FIRST}>
         <SignupFirstStep handleNextStep={handleNextStep} />
