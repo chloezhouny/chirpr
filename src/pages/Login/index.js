@@ -2,18 +2,19 @@ import { useState, useEffect } from 'react';
 import {
   Button, Form, Toast,
 } from 'antd-mobile';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import TInput from '@components/TInput';
 import { LoginAPI } from '@utils/LoginAPI';
 import { useAppContext } from '@utils/context';
+import { useGoTo } from '@utils/hooks';
 import styles from './index.module.scss';
 
 const Login = () => {
   const [form] = Form.useForm();
   const [footerBtnDisabled, setFooterBtnDisabled] = useState(true);
   const [, setStore] = useAppContext();
-  const nav = useNavigate();
+  const goTo = useGoTo();
 
   useEffect(() => {
     setStore({
@@ -47,7 +48,7 @@ const Login = () => {
         position: 'top',
       });
       Cookies.set('userId', res.data[0].id);
-      nav('/home');
+      goTo('home');
       return;
     }
     Toast.show({

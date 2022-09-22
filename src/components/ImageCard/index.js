@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Image, ImageViewer } from 'antd-mobile';
 import classNames from 'classnames';
@@ -10,7 +10,27 @@ const ImageCard = ({
   imgs, replyCnt, retweetCnt, likeCnt,
 }) => {
   const imageViewRef = useRef();
+  const imageContainerRef = useRef();
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [visible]);
+
+  const getContainerStyle = () => {
+    if (imgs.length === 1) {
+      return styles.container1;
+    }
+    return styles.container;
+  };
+
   const getWrapperStyle = () => {
     switch (imgs.length) {
       case 1:
@@ -31,7 +51,7 @@ const ImageCard = ({
     imageViewRef.current.swipeTo(index);
   };
   return (
-    <div className={styles.container}>
+    <div ref={imageContainerRef} className={(styles.container, getContainerStyle())}>
       <div className={classNames(styles.wrapper, getWrapperStyle())}>
         {imgs.map((img, index) => (
           <Image
@@ -45,35 +65,39 @@ const ImageCard = ({
         ))}
       </div>
       <ImageViewer.Multi
+        getContainer={document.body}
         ref={imageViewRef}
         images={imgs}
         visible={visible}
         onClose={() => {
           setVisible(false);
         }}
+        renderFooter={() => (
+          <Bar
+            isBottom
+            replyCnt={replyCnt}
+            retweetCnt={retweetCnt}
+            likeCnt={likeCnt}
+            type={BAR_TYPE_KEYS.TWEET}
+          />
+        )}
       />
-      {visible && (
-        <Bar
-          isBottom
-          replyCnt={replyCnt}
-          retweetCnt={retweetCnt}
-          likeCnt={likeCnt}
-          type={BAR_TYPE_KEYS.TWEET}
-        />
-      )}
     </div>
   );
 };
 
 ImageCard.propTypes = {
   imgs: PropTypes.arrayOf(PropTypes.string),
-  replyCnt: PropTypes.number.isRequired,
-  retweetCnt: PropTypes.number.isRequired,
-  likeCnt: PropTypes.number.isRequired,
+  replyCnt: PropTypes.number,
+  retweetCnt: PropTypes.number,
+  likeCnt: PropTypes.number,
 };
 
 ImageCard.defaultProps = {
   imgs: [],
+  replyCnt: undefined,
+  retweetCnt: undefined,
+  likeCnt: undefined,
 };
 
 export default ImageCard;

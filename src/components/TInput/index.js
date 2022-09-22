@@ -14,7 +14,7 @@ function TInput({
       setContentFocused(true);
       setContainerFocused(true);
     }
-  }, []);
+  }, [value]);
 
   const handleFocus = () => {
     setContentFocused(true);

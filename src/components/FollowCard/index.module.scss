@@ -1,0 +1,44 @@
+@import "../../index.scss";
+
+.container {
+	padding: -1px 3px;
+	height: 100px;
+}
+
+.avatarContainer {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	vertical-align: top;
+	box-sizing: border-box;
+	.avatar {
+		width: 46px;
+		height: 46px;
+		border-radius: 50%;
+	}
+}
+
+.nameContainer {
+	width: calc(60% - 50px);
+	display: inline-block;
+	padding: 1px 0 0 7px;
+	box-sizing: border-box;
+	font-family: $tFont;
+	height: 20px;
+	font-size: 14px;
+	margin: 2px auto;
+	.name {
+		color: $tBlack;
+		font-size: 14px;
+		font-family: $tFontBold;
+		line-height: 19px;
+		margin-bottom: 1px;
+	}
+}
+
+.follow {
+   margin-top: -5px;
+   width: 50px;
+   float: right;
+}
+

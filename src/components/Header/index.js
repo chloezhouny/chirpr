@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from '@utils/context';
 import { useGoTo, useCurTab } from '@utils/hooks';
 import close from '@assets/close.svg';
 import leftArrow from '@assets/left-arrow.svg';
 import logo from '@assets/bird.png';
+import SideBar from '@components/SideBar';
 import styles from './index.module.scss';
 
 const STEP = {
@@ -11,37 +13,54 @@ const STEP = {
   SECOND: 2,
 };
 
-function Header({
-  children,
-}) {
+function Header({ children, title }) {
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const [store] = useAppContext();
   const goTo = useGoTo();
   const curTab = useCurTab();
   const result = [];
-  console.log(store);
 
   // header for twittuer member pages
   if (store.user) {
     if (curTab?.hideAppHeader) {
       result.push(
         <div key="contentPageHeader" className={styles.contentPageHeader}>
-          <img src={leftArrow} alt="" onClick={() => goTo()} className={styles.leftArrow} />
+          <img
+            src={leftArrow}
+            alt=""
+            onClick={() => goTo()}
+            className={styles.leftArrow}
+          />
+          {title && (
+            <span key="title" className={styles.title}>
+              {title}
+            </span>
+          )}
           {curTab.title && (
-          <span className={styles.title}>
-            {curTab.title}
-          </span>
+            <span key="curTabTitle" className={styles.title}>
+              {curTab.title}
+            </span>
           )}
           {children}
         </div>,
       );
     } else {
       result.push(
+        <SideBar
+          key="sideBar"
+          visible={sidebarVisible}
+          onClose={() => setSidebarVisible(false)}
+        />,
+      );
+      result.push(
         <div key="homePageHeader" className={styles.homePageHeader}>
-          <img src={store.user?.profile_image_url} alt="" className={styles.avatar} />
-          <span className={styles.title}>
-            {store.title}
-          </span>
-          ,
+          <img
+            src={store.user?.profile_image_url}
+            alt=""
+            className={styles.avatar}
+            onClick={() => setSidebarVisible(true)}
+          />
+          <span className={styles.title}>{curTab.title}</span>
         </div>,
       );
     }
@@ -60,7 +79,14 @@ function Header({
     );
   }
   if (!store.user) {
-    result.push(<img key="twittuerLogo" src={logo} alt="twittuer-logo" className={store.handleClose ? styles.logo : styles.logoLogin} />);
+    result.push(
+      <img
+        key="twittuerLogo"
+        src={logo}
+        alt="twittuer-logo"
+        className={store.handleClose ? styles.logo : styles.logoLogin}
+      />,
+    );
   }
   return (
     <div className={styles.header}>
@@ -72,10 +98,12 @@ function Header({
 
 Header.propTypes = {
   children: PropTypes.node,
+  title: PropTypes.string,
 };
 
 Header.defaultProps = {
   children: null,
+  title: '',
 };
 
 export default Header;

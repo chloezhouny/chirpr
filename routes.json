@@ -1,11 +1,22 @@
 {
-	"/api/tweets": "/tweets",
+	"/api/tweets": "/feeds",
+    "/api/tweets/:id": "/feeds/:id",
+	"/api/tweets/user/:userId": "/feeds/?user.id=:userId",
 	"/api/replys": "/replys",
 	"/api/likes": "/likes",
-	"/api/likes/delete": "/likes",
+	"/api/likes/:id": "/likes/:id",
+	"/api/likes/user/:userId": "/likes/?userId=:userId",
+	"/api/likes/tweet/:tweetId": "/likes/?tweetId=:tweetId",
+	"/api/likes/comment/:commentId/:tweetId": "/likes/?commentId=:commentId&tweetId=:tweetId",
+	"/api/likes/isLiked/:userId/:tweetId": "/likes/?userId=:userId&tweetId=:tweetId",
+	"/api/friendships/:userId/followers": "/friendships/?following.userId=:userId",
+	"/api/friendships/:userId/followings": "/friendships/?userId=:userId",
+	"/api/friendships/following": "/friendships",
+	"/api/friendships/following/:id": "/friendships/:id",
+	"/api/friendships/:userId/following/:targetUserId": "/friendships/?userId=:userId&following.userId=:targetUserId",
 	"/api/accounts/signup": "/user",
 	"/api/users/:id": "/user/:id",
-	"/api/login/:username/:password": "/user/?username=:username&password:password"
+	"/api/login/:username/:password": "/user/?username=:username&password=:password"
 }
 
 

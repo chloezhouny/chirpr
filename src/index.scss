@@ -51,6 +51,11 @@ $tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   }
 }
 
+.adm-list-default .adm-list-body {
+  border-top: none;
+  border-bottom: none;
+}
+
 .adm-text-area {
   font-family: $tFont;
   .adm-text-area-element {
@@ -81,3 +86,7 @@ $tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     }
   }
 }
+
+  .adm-image-viewer-image-wrapper {
+    background-color: $tLightGray !important;
+  }

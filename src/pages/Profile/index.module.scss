@@ -1,0 +1,89 @@
+@import "../../index.scss";
+
+.container {
+	padding: 15px 16px;
+	:global(.adm-tabs-content) {
+		padding: 0;
+	}
+	:global(.adm-tabs-tab) {
+		font-size: 14px;
+		font-family: $tFontMedium;
+		padding: 15px 0;
+	}
+	:global(.adm-tabs-tab-active) {
+		font-family: $tFontBold;
+		color: $tBlack;
+	}
+	:global(.adm-tabs-tab-line){
+		background: $tBlue;
+		border-radius: 9999px;
+		height: 4px;
+	}
+}
+
+.banner {
+	background-color: $tLightGray;
+	height: 130px;
+	margin: -15px -16px;
+}
+
+.avatar {
+	margin-top: -28px;
+	margin-bottom: 11px;
+	width: 85.5px;
+	height: 85.5px;
+	object-fit: cover;
+	min-width: 46px;
+	border-radius: 50%;
+	border: 2px solid white;
+	background-color: #ffffff;
+}
+
+.name {
+	display: flex;
+	margin-top: 5px;
+	color: $tBlack;
+	font-size: 16px;
+	font-family: $tFontHeavy;
+	line-height: 19px;
+	.icon {
+		width: 19px;
+		margin-left: 2px;
+	}
+}
+
+.username {
+	font-size: 14px;
+	line-height: 19px;
+	color: $tGray;
+}
+
+.follow {
+	margin: 11px 0 15px 0;
+	font-size: 13px;
+	line-height: 19px;
+}
+.following {
+	font-family: $tFontHeavy;
+	margin-right: 3px;
+}
+
+.followers {
+	composes: following;
+	margin-left: 19px;
+}
+
+.editProfile {
+	height: 34px;
+	width: 105px;
+	padding: 0 15px;
+	font-size: 14px;
+	font-family: $tFontBold;
+	line-height: 19px;
+	color: $tBlack;
+	border-radius: 9999px;
+	margin-top: 25.75px;
+	overflow: hidden;
+	float: right;
+	border-color: $tLightGray;
+}

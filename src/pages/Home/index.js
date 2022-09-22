@@ -9,7 +9,7 @@ import BottomBar from '@components/BottomBar';
 import ComposeTweetButton from '@components/ComposeTweetButton';
 
 const Home = () => {
-  const [, setStore] = useAppContext();
+  const [store, setStore] = useAppContext();
   const nav = useNavigate();
   const location = useLocation();
   const curTab = useCurTab();
@@ -21,29 +21,34 @@ const Home = () => {
         nav('/login');
         return;
       }
+      if (store.user) {
+        return;
+      }
       const res = await LoginAPI.getUser(userId);
       if (res.data) {
         setStore({
           user: res.data,
         });
         if (location.pathname === '/login') {
-          nav('/home');
+          nav('/');
         }
         return;
       }
       nav('/login');
     };
-    init();
-  }, []);
+    if (location.pathname !== '/signup') {
+      init();
+    }
+  }, [location.pathname]);
   const handleComposeTweetOnClick = () => nav('/compose/tweet');
 
   return (
     <>
       {(!curTab || (curTab && !curTab.hideAppHeader)) && <Header /> }
       <Outlet />
-      {curTab && !curTab.hideAppHeader && <BottomBar />}
+      {curTab && curTab.key && !curTab.hideAppHeader && <BottomBar />}
       {
-        curTab && !curTab.hideAppHeader
+        curTab && curTab.key && !curTab.hideAppHeader
         && <ComposeTweetButton handleComposeTweetOnClick={handleComposeTweetOnClick} />
       }
     </>

@@ -50,6 +50,21 @@ export const tabs = [
     link: '/reply/:id',
     hideAppHeader: true,
   },
+  {
+    key: 'profile',
+    link: '/profile',
+    hideAppHeader: true,
+  },
+  {
+    key: 'editProfile',
+    link: '/settings/profile',
+    hideAppHeader: true,
+  },
+  {
+    key: 'follow',
+    link: '/follow',
+    hideAppHeader: true,
+  },
 ];
 
 export const getTabByKey = (key) => tabs.find((item) => item.key === key);

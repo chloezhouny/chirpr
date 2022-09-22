@@ -42,4 +42,4 @@ axios.interceptors.response.use(
 export const get = (url) => axios.get(url);
 export const post = (url, params) => axios.post(url, params);
 export const put = (url, params) => axios.put(url, params);
-export const del = (url, params) => axios.del(url, params);
+export const del = (url) => axios.delete(url);

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TextArea, Toast } from 'antd-mobile';
+import moment from 'moment';
 import Header from '@components/Header';
 import TButton from '@components/TButton';
 import ImageUpload from '@components/ImageUpload';
@@ -17,8 +18,19 @@ const ComposeTweet = () => {
 
   const handleTweetSubmit = () => {
     TweetAPI.createTweet({
-      content: tweetContent,
-      files: Object.values(imgs),
+      created_at: moment(),
+      user: {
+        id: store.user?.id,
+        name: store.user?.name,
+        username: store.user?.username,
+        profile_image_url: store.user?.profile_image_url,
+      },
+      comments: [],
+      text: tweetContent,
+      likes_count: 0,
+      comments_count: 0,
+      retweet_count: 0,
+      media_urls: Object.values(imgs),
     }).then((res) => {
       if (res.success) {
         Toast.show('Your tweet was sent.');
@@ -57,6 +69,7 @@ const ComposeTweet = () => {
         <TButton
           disabled={tweetContent.length === 0 && Object.keys(imgs).length === 0}
           handleOnClick={handleTweetSubmit}
+          isBlue
         >
           Tweet
         </TButton>

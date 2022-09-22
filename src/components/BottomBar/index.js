@@ -1,26 +1,27 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { TabBar } from 'antd-mobile';
-import { useAppContext } from '@utils/context';
+// import { useAppContext } from '@utils/context';
 import { useCurTab, useGoTo } from '@utils/hooks';
-import { tabs, getTabByKey } from '@utils/constants';
+// import { tabs, getTabByKey } from '@utils/constants';
+import { tabs } from '@utils/constants';
 import styles from './index.module.scss';
 
 const BottomBar = () => {
-  const [store, setStore] = useAppContext();
+  // const [store, setStore] = useAppContext();
   const curTab = useCurTab();
   const goTo = useGoTo();
 
-  useEffect(() => {
-    if (curTab) {
-      setStore({
-        title: curTab.title,
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (curTab) {
+  //     setStore({
+  //       title: curTab.title,
+  //     });
+  //   }
+  // }, []);
   const handleTabItemChange = (key) => {
-    const newTab = getTabByKey(key);
-    setStore({ title: newTab.title });
-    console.log(store);
+    // const newTab = getTabByKey(key);
+    // setStore({ title: newTab.title });
+    // console.log(store);
     goTo(key);
   };
 

@@ -4,10 +4,6 @@
 	height: 170px;
 	margin-top: 11px;
 	padding: 0 2px 0 0;
-
-	:global(.adm-mask) {
-		background-color: $tLightGray !important;
-	}
 	.img {
 		position: absolute;
 		width: 50%;
@@ -90,3 +86,8 @@
 		}
 	}
 }
+
+.container1 {
+	height: 300px;
+}
+

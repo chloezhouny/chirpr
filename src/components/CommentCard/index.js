@@ -32,6 +32,7 @@ const CommentCard = ({ data }) => {
         </div>
         <div className={styles.bar}>
           <Bar
+            dataSrc={data}
             likeOnly
             id={data.id}
             likeCnt={data.likes_count}
@@ -42,7 +43,6 @@ const CommentCard = ({ data }) => {
     </div>
   );
 };
-
 CommentCard.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number,

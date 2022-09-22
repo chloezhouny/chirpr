@@ -1,4 +1,4 @@
-import { get } from './index';
+import { get, put } from './index';
 
 // eslint-disable-next-line import/prefer-default-export
 export const LoginAPI = {
@@ -7,5 +7,8 @@ export const LoginAPI = {
   },
   getUser(id) {
     return get(`/api/users/${Number(id)}`);
+  },
+  updateUser(id, params) {
+    return put(`/api/users/${Number(id)}`, params);
   },
 };

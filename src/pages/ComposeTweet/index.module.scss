@@ -9,8 +9,11 @@
 
 .avatarContainer {
 	width: 58px;
+	height: 58px;
 	.avatar {
+	width: 46px;
 	height: 46px;
+	object-fit: cover;
     border-radius: 50%;
     }
 

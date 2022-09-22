@@ -8,11 +8,25 @@
 		line-height: 15px;
 		padding: 0 15px;
 		border-radius: 9999px;
-		background-color: rgb(29, 155, 240);
+		// background-color: rgb(29, 155, 240);
 		color: #fff;
 		font-size: 12.7px;
 		font-family: $tFontHeavy;
 		float: right;
+	}
+
+	.btnBlue {
+		background-color: rgb(29, 155, 240);
+	}
+
+	.btnBlack {
+		background-color: $tBlack;
+	}
+
+	.btnOutlined {
+		background-color: none;
+		border: 1px solid $tLightGray;
+		color: $tBlack;
 	}
 
 	:global(.adm-button-disabled) {
