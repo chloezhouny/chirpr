@@ -29,7 +29,6 @@ const Bar = ({
 
   useEffect(() => {
     const init = async () => {
-      console.log(dataSrc);
       const res = await ReplyAPI.getIsLiked(store.user?.id, id);
       if (res.success && res.data.length > 0) {
         setLiked(true);

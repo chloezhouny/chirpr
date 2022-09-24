@@ -24,13 +24,6 @@ const ImageCard = ({
     };
   }, [visible]);
 
-  const getContainerStyle = () => {
-    if (imgs.length === 1) {
-      return styles.container1;
-    }
-    return styles.container;
-  };
-
   const getWrapperStyle = () => {
     switch (imgs.length) {
       case 1:
@@ -51,7 +44,7 @@ const ImageCard = ({
     imageViewRef.current.swipeTo(index);
   };
   return (
-    <div ref={imageContainerRef} className={(styles.container, getContainerStyle())}>
+    <div ref={imageContainerRef} className={styles.container}>
       <div className={classNames(styles.wrapper, getWrapperStyle())}>
         {imgs.map((img, index) => (
           <Image

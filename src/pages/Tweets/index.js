@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { PullToRefresh, InfiniteScroll, DotLoading } from 'antd-mobile';
 import {
   List,
@@ -50,6 +50,7 @@ const statusRecord = {
 const Tweets = () => {
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(false);
+  const listRef = useRef();
   useEffect(() => {
     const init = async () => {
       const res = await TweetAPI.getFeeds();
@@ -71,7 +72,9 @@ const Tweets = () => {
     >
       {({ registerChild }) => (
         <div style={st} key={key} ref={registerChild}>
-          <TweetCard dataSrc={data[index]} />
+          <TweetCard
+            dataSrc={data[index]}
+          />
         </div>
       )}
     </CellMeasurer>
@@ -95,8 +98,8 @@ const Tweets = () => {
       >
         <WindowScroller>
           {({
-            height,
             width,
+            height,
             isScrolling,
             registerChild,
             onChildScroll,
@@ -104,6 +107,7 @@ const Tweets = () => {
           }) => (
             <div ref={registerChild}>
               <List
+                ref={listRef}
                 deferredMeasurementCache={cache}
                 autoHeight
                 height={height}
