@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useAppContext } from '@utils/context';
 import { useGoTo } from '@utils/hooks';
 import { ReplyAPI } from '@utils/ReplyAPI';
+import { TweetAPI } from '@utils/TweetAPI';
 import Header from '@components/Header';
 import TButton from '@components/TButton';
 import styles from './index.module.scss';
@@ -21,18 +22,31 @@ const Reply = () => {
     setData(location.state);
   }, []);
 
-  const handleOnClick = () => {
-    ReplyAPI.createReply({
-      content: replyContent,
+  const handleOnClick = async () => {
+    const replyRes = await ReplyAPI.createReply({
       tweet_id: data.id,
-    }).then((res) => {
-      if (res?.success) {
-        Toast.show({
-          content: 'Your tweet was sent.',
-        });
+      user: {
+        id: store.user.id,
+        name: store.user.name,
+        username: store.user.username,
+        profile_image_url: store.user.profile_image_url,
+      },
+      text: replyContent,
+      created_at: moment(),
+      likes_count: 0,
+    });
+    if (replyRes?.success) {
+      Toast.show({
+        content: 'Your tweet was sent.',
+      });
+      const replysRes = await ReplyAPI.getReplysByTweet(data.id);
+      const tweetRes = await TweetAPI.getTweet(data.id);
+      tweetRes.data.comments_count = replysRes.data.length;
+      const updateTweetRes = await TweetAPI.updateTweet(data.id, tweetRes.data);
+      if (updateTweetRes?.success) {
         goTo();
       }
-    });
+    }
   };
   const handleReplyContentChange = (v) => {
     setReplyContent(v);

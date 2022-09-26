@@ -29,7 +29,12 @@ const Bar = ({
 
   useEffect(() => {
     const init = async () => {
-      const res = await ReplyAPI.getIsLiked(store.user?.id, id);
+      let res;
+      if (type === 'tweet') {
+        res = await ReplyAPI.getIsLiked(store.user?.id, id);
+      } else if (type === 'reply') {
+        res = await ReplyAPI.getIsLikedComment(store.user?.id, id);
+      }
       if (res.success && res.data.length > 0) {
         setLiked(true);
         setLikedId(res.data[0].id);
@@ -86,20 +91,12 @@ const Bar = ({
           setData(likesCntRes.data);
         }
       } else if (type === 'reply') {
-        const commentLikesRes = await ReplyAPI.getLikesByComment(id, dataSrc.tweet_id);
-        const tweetRes = await TweetAPI.getTweet(dataSrc.tweet_id);
-        let commentIndex;
-        tweetRes.data.comments.forEach((comment, index) => {
-          if (comment.id === id) {
-            commentIndex = index;
-          }
-        });
-        tweetRes.data.comments[commentIndex].likes_count = commentLikesRes.data.length;
-        const commentLikesCntRes = await TweetAPI.updateTweet(id, {
-          ...tweetRes.data,
-        });
-        if (commentLikesCntRes.success) {
-          setData(commentLikesCntRes.data.comments[commentIndex]);
+        const commentLikesRes = await ReplyAPI.getLikesByComment(id);
+        const commentRes = await ReplyAPI.getReply(id);
+        commentRes.data.likes_count = commentLikesRes.data.length;
+        const updatedCommentRes = await ReplyAPI.updateReply(id, commentRes.data);
+        if (updatedCommentRes.success) {
+          setData(updatedCommentRes.data);
         }
       }
     }

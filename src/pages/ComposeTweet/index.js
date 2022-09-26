@@ -25,7 +25,6 @@ const ComposeTweet = () => {
         username: store.user?.username,
         profile_image_url: store.user?.profile_image_url,
       },
-      comments: [],
       text: tweetContent,
       likes_count: 0,
       comments_count: 0,

@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Bar from '@components/Bar';
 import { BAR_TYPE_KEYS } from '@components/Bar/constants';
-import { useGoTo } from '@utils/hooks';
 import { timeDiff } from '@utils';
+import { useGoTo } from '@utils/hooks';
 import styles from './index.module.scss';
 
-const CommentCard = ({ data }) => {
+const CommentCard = ({ dataSrc }) => {
   const goTo = useGoTo();
+  const [data] = useState(dataSrc);
   return (
     <div className={styles.container}>
       <div className={styles.avatarContainer}>
@@ -26,7 +28,7 @@ const CommentCard = ({ data }) => {
         </div>
         <div
           className={styles.text}
-          onClick={() => goTo('tweet', { id: data.id })}
+          onClick={() => goTo('tweet', { id: dataSrc.tweet_id })}
         >
           {data.text}
         </div>
@@ -44,8 +46,9 @@ const CommentCard = ({ data }) => {
   );
 };
 CommentCard.propTypes = {
-  data: PropTypes.shape({
+  dataSrc: PropTypes.shape({
     id: PropTypes.number,
+    tweet_id: PropTypes.number,
     user: PropTypes.shape({
       name: PropTypes.string,
       username: PropTypes.string,
@@ -54,7 +57,6 @@ CommentCard.propTypes = {
     text: PropTypes.string,
     created_at: PropTypes.string,
     likes_count: PropTypes.number,
-    has_liked: PropTypes.bool,
   }).isRequired,
 };
 

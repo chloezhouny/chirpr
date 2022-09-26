@@ -6,13 +6,20 @@ import ImageCard from '@components/ImageCard';
 import CommentCard from '@components/CommentCard';
 import Bar from '@components/Bar';
 import { BAR_TYPE_KEYS } from '@components/Bar/constants';
+import { ReplyAPI } from '@utils/ReplyAPI';
 import styles from './index.module.scss';
 
 const Tweet = () => {
   const location = useLocation();
   const [data, setData] = useState(location.state);
+  const [commentData, setCommentData] = useState([]);
   useEffect(() => {
-    setData(location.state);
+    const init = async () => {
+      setData(location.state);
+      const res = await ReplyAPI.getReplysByTweet(location.state.id);
+      setCommentData(res.data);
+    };
+    init();
   }, []);
   return (
     <>
@@ -64,7 +71,7 @@ const Tweet = () => {
           />
         </div>
       </div>
-      {data.comments.map((item) => (<CommentCard key={item.id} data={item} />))}
+      {commentData.map((item) => (<CommentCard key={item.id} dataSrc={item} />))}
     </>
   );
 };
