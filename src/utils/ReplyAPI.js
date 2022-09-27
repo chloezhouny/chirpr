@@ -33,7 +33,19 @@ export const ReplyAPI = {
   getIsLikedComment(userId, commentId) {
     return get(`/api/likes/isLiked/comment/${Number(userId)}/${Number(commentId)}`);
   },
-  deleteLike(likedId) {
-    return del(`/api/likes/${Number(likedId)}`);
+  deleteLike(id) {
+    return del(`/api/likes/${Number(id)}`);
+  },
+  createRetweet(params) {
+    return post('/api/retweets', params);
+  },
+  getRetweetsByTweet(tweetId) {
+    return get(`/api/retweets/tweet/${Number(tweetId)}`);
+  },
+  getIsRetweeted(userId, tweetId) {
+    return get(`/api/retweets/isRetweeted/${Number(userId)}/${Number(tweetId)}`);
+  },
+  deleteRetweet(id) {
+    return del(`/api/retweets/${Number(id)}`);
   },
 };

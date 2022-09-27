@@ -23,21 +23,28 @@ const Bar = ({
   const [activeKey, setActiveKey] = useState();
   const [visible, setVisible] = useState(false);
   const [retweeted, setRetweeted] = useState(false);
+  const [retweetId, setRetweetId] = useState();
   const [liked, setLiked] = useState(false);
   const [likedId, setLikedId] = useState();
   const goTo = useGoTo();
 
   useEffect(() => {
     const init = async () => {
-      let res;
+      let likesRes;
+      let retweetsRes;
       if (type === 'tweet') {
-        res = await ReplyAPI.getIsLiked(store.user?.id, id);
+        likesRes = await ReplyAPI.getIsLiked(store.user?.id, id);
+        retweetsRes = await ReplyAPI.getIsRetweeted(store.user?.id, id);
       } else if (type === 'reply') {
-        res = await ReplyAPI.getIsLikedComment(store.user?.id, id);
+        likesRes = await ReplyAPI.getIsLikedComment(store.user?.id, id);
       }
-      if (res.success && res.data.length > 0) {
+      if (likesRes.success && likesRes.data.length > 0) {
         setLiked(true);
-        setLikedId(res.data[0].id);
+        setLikedId(likesRes.data[0].id);
+      }
+      if (retweetsRes.success && retweetsRes.data.length > 0) {
+        setRetweeted(true);
+        setRetweetId(retweetsRes.data[0].id);
       }
     };
     init();
@@ -49,11 +56,34 @@ const Bar = ({
     }
     if (key === TAB_KEYS.RETWEET) {
       if (retweeted) {
-        setRetweeted(false);
-        return;
+        const res = await ReplyAPI.deleteRetweet(retweetId);
+        if (res.success) {
+          setRetweeted(false);
+          setRetweetId(null);
+        }
+      } else {
+        const res = await ReplyAPI.createRetweet({
+          content_type: type,
+          userId: store.user?.id,
+          tweetId: id,
+        });
+        if (res.success) {
+          Toast.show(
+            'Retweeted.',
+          );
+          setRetweeted(true);
+          setRetweetId(res.data.id);
+        }
       }
-      Toast.show('Retweeted.');
-      setRetweeted(true);
+      const retweetsRes = await ReplyAPI.getRetweetsByTweet(id);
+      const tweetRes = await TweetAPI.getTweet(id);
+      tweetRes.data.retweet_count = retweetsRes.data.length;
+      const retweetsCntRes = await TweetAPI.updateTweet(id, {
+        ...tweetRes.data,
+      });
+      if (retweetsCntRes.success) {
+        setData(retweetsCntRes.data);
+      }
     }
     if (key === TAB_KEYS.SHARE) {
       setVisible(true);
@@ -126,7 +156,7 @@ const Bar = ({
         {getTabs({
           handleTabClick,
           replyCnt: data.comments_count,
-          retweetCt: data.retweet_count,
+          retweetCnt: data.retweet_count,
           likeCnt: data.likes_count,
           retweeted,
           likeOnly,
