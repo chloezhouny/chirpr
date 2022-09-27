@@ -14,7 +14,7 @@ function TInput({
       setContentFocused(true);
       setContainerFocused(true);
     }
-  }, []);
+  }, [value]);
 
   const handleFocus = () => {
     setContentFocused(true);
@@ -22,7 +22,6 @@ function TInput({
   };
 
   const handleBlur = () => {
-    console.log(value);
     if (value === undefined || value.length === 0) {
       setContentFocused(false);
     }

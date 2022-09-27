@@ -1,6 +1,29 @@
 {
+	"/api/tweets": "/feeds",
+    "/api/tweets/:id": "/feeds/:id",
+	"/api/tweets/user/:userId": "/feeds/?user.id=:userId",
+	"/api/replys": "/replys",
+	"/api/replys/:id": "/replys/:id",
+	"/api/replys/tweet/:tweetId": "/replys/?tweet_id=:tweetId",
+	"/api/retweets": "/retweets",
+	"/api/retweets/:id": "/retweets/:id",
+	"/api/retweets/tweet/:tweetId": "/retweets/?tweetId=:tweetId",
+	"/api/retweets/isRetweeted/:userId/:tweetId": "/retweets/?userId=:userId&tweetId=:tweetId",
+	"/api/likes": "/likes",
+	"/api/likes/:id": "/likes/:id",
+	"/api/likes/user/:userId": "/likes/?userId=:userId",
+	"/api/likes/tweet/:tweetId": "/likes/?tweetId=:tweetId",
+	"/api/likes/comment/:commentId": "/likes/?commentId=:commentId",
+	"/api/likes/isLiked/:userId/:tweetId": "/likes/?userId=:userId&tweetId=:tweetId",
+	"/api/likes/isLiked/comment/:userId/:commentId": "/likes/?userId=:userId&commentId=:commentId",
+	"/api/friendships/:userId/followers": "/friendships/?following.userId=:userId",
+	"/api/friendships/:userId/followings": "/friendships/?userId=:userId",
+	"/api/friendships/following": "/friendships",
+	"/api/friendships/following/:id": "/friendships/:id",
+	"/api/friendships/:userId/following/:targetUserId": "/friendships/?userId=:userId&following.userId=:targetUserId",
 	"/api/accounts/signup": "/user",
-	"/api/login/:username/:password": "/user/?username=:username&password:password"
+	"/api/users/:id": "/user/:id",
+	"/api/login/:username/:password": "/user/?username=:username&password=:password"
 }
 
 

@@ -8,9 +8,11 @@
     "@testing-library/user-event": "^13.5.0",
     "antd-mobile": "^5.18.0",
     "axios": "^0.27.2",
+    "classnames": "^2.3.1",
     "craco-alias": "^3.0.1",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.26.0",
+    "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
@@ -19,6 +21,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
+    "react-svg": "^15.1.6",
+    "react-virtualized": "^9.22.3",
     "sass": "^1.54.0",
     "vconsole": "^3.14.6",
     "web-vitals": "^2.1.4"
@@ -50,6 +54,7 @@
   "devDependencies": {
     "@craco/craco": "^5.9.0",
     "eslint-config-airbnb": "^19.0.4",
-    "json-server": "^0.17.0"
+    "json-server": "^0.17.0",
+    "postcss-px-to-viewport-with-include": "^1.0.0"
   }
 }

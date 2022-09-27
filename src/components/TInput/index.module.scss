@@ -1,4 +1,4 @@
-@import "../../main.module.scss";
+@import "../../index.scss";
 
 .container {
 	composes: mediumInput from '../../main.module.scss';
@@ -50,10 +50,6 @@
 	top: 5px;
 	right: 8px;
 	font-size: 13px
-}
-
-:global(.adm-input-element){
-	color: $tBlack;
 }
 
 .input {

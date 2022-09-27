@@ -3,15 +3,18 @@ import {
   Button, Form, Toast,
 } from 'antd-mobile';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import TInput from '@components/TInput';
-import loginAPI from '@utils/LoginAPI';
+import { LoginAPI } from '@utils/LoginAPI';
 import { useAppContext } from '@utils/context';
+import { useGoTo } from '@utils/hooks';
 import styles from './index.module.scss';
 
 const Login = () => {
   const [form] = Form.useForm();
   const [footerBtnDisabled, setFooterBtnDisabled] = useState(true);
   const [, setStore] = useAppContext();
+  const goTo = useGoTo();
 
   useEffect(() => {
     setStore({
@@ -38,12 +41,14 @@ const Login = () => {
 
   const handleSubmit = async () => {
     const values = form.getFieldsValue();
-    const res = await loginAPI(values.username, values.password);
+    const res = await LoginAPI.login(values.username, values.password);
     if (res.success && res.data.length > 0) {
       Toast.show({
         content: 'You are successfully logged in',
         position: 'top',
       });
+      Cookies.set('userId', res.data[0].id);
+      goTo('home');
       return;
     }
     Toast.show({
@@ -60,7 +65,10 @@ const Login = () => {
           onValuesChange={handleValuesChange}
           className={styles.formContainer}
         >
-          <Form.Item name="username" rules={[{ required: true, message: '' }]}>
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: '' }]}
+          >
             <TInput label="Phone, email, or username" valid />
           </Form.Item>
           <Form.Item name="password" rules={[{ required: true, message: '' }]}>

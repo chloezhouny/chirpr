@@ -1,4 +1,4 @@
-@import "../../main.module.scss";
+@import "../../index.scss";
 
 .container {
 	composes: input from "../../main.module.scss";
@@ -44,7 +44,6 @@
 	composes: placeholder;
 	margin-top: 14px;
 	padding-left: 1px;
-
 }
 
 .calendarIcon {

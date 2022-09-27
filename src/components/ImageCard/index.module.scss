@@ -1,0 +1,89 @@
+@import "../../index.scss";
+
+.container {
+	height: 170px;
+	margin-top: 11px;
+	padding: 0 2px 0 0;
+	.img {
+		position: absolute;
+		width: 50%;
+	}
+	.wrapper {
+		position: relative;
+		border-radius: 15px;
+		height: 170px;
+	}
+	.wrapper1 {
+		:global(.img0) {
+			left: 0;
+			width: 100%;
+			object-fit: cover;
+			border-radius: 15px;
+		}
+	}
+
+	.wrapper2 {
+		overflow: hidden;
+		:global(.img0) {
+			left: 0;
+			height: 170px;
+			border-right: solid 2px #fff;
+		}
+		:global(.img1) {
+			border-left: solid 2px #fff;
+			left: 50%;
+			height: 170px;
+		}
+	}
+	.wrapper3 {
+		overflow: hidden;
+		:global(.img0) {
+			left: 0;
+			height: 170px;
+			border-right: solid 2px #fff;
+		}
+		:global(.img1) {
+			left: 50%;
+			height: 85px;
+			border-left: solid 2px #fff;
+			border-bottom: solid 2px #fff;
+		}
+		:global(.img2) {
+			left: 50%;
+			top: 85px;
+			height: 85px;
+			border-left: solid 2px #fff;
+			border-top: solid 2px #fff;
+		}
+	}
+	.wrapper4 {
+		overflow: hidden;
+		:global(.img0) {
+			left: 0;
+			height: 85px;
+			border-right: solid 2px #fff;
+			border-bottom: solid 2px #fff;
+		}
+		:global(.img1) {
+			left: 50%;
+			height: 85px;
+			border-left: solid 2px #fff;
+			border-bottom: solid 2px #fff;
+		}
+		:global(.img2) {
+			left: 50%;
+			top: 85px;
+			height: 85px;
+			border-left: solid 2px #fff;
+			border-top: solid 2px #fff;
+		}
+		:global(.img3) {
+			left: 0;
+			top: 85px;
+			height: 85px;
+			border-right: solid 2px #fff;
+			border-top: solid 2px #fff;
+		}
+	}
+}
+

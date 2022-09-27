@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: tFont, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+$tBlue: rgb(29, 155, 240);
+$tBlack: rgb(15, 20, 25);
+$tGray: rgb(83, 100, 113);
+$tLightGray: rgb(207, 217, 222);
+$tBorderGray: #f1f5f5;
+$tRed: rgb(244, 33, 46);
+$tFont: tfont, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+  Arial, sans-serif;
+$tFontMedium: tfontmedium, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Helvetica, Arial, sans-serif;
+$tFontBold: tfontbold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Helvetica, Arial, sans-serif;
+$tFontHeavy: tfontheavy, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Helvetica, Arial, sans-serif;
+
+@font-face {
+  font-family: "tfont";
+  src: url("./assets/chirp-regular-web.woff") format("woff");
+}
+
+@font-face {
+  font-family: "tfontbold";
+  src: url("./assets/chirp-bold-web.woff") format("woff");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "tfontmedium";
+  src: url("./assets/chirp-medium-web.woff") format("woff");
+}
+
+@font-face {
+  font-family: "tfontheavy";
+  src: url("./assets/chirp-heavy-web.woff") format("woff");
+}
+
+.adm-input {
+  --placeholder-color: rgb(83, 100, 113);
+  font-family: $tFont;
+  .adm-input-element {
+    color: $tBlack;
+  }
+}
+
+.adm-list-default .adm-list-body {
+  border-top: none;
+  border-bottom: none;
+}
+
+.adm-text-area {
+  font-family: $tFont;
+  .adm-text-area-element {
+    --placeholder-color: rgb(83, 100, 113);
+    color: rgb(15, 20, 25);
+    font-family: $tFont;
+    font-size: 19px;
+  }
+}
+
+.adm-toast-wrap {
+  .adm-toast-main {
+    top: 97.2% !important;
+    background-color: $tBlue;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    padding: 11px 13px;
+    .adm-auto-center {
+      justify-content: start;
+      .adm-auto-center-content {
+        font-size: 13px;
+        margin-left: 9px;
+        font-family: $tFont;
+        font-weight: 600;
+        letter-spacing: -0.2px;
+      }
+    }
+  }
+}
+
+  .adm-image-viewer-image-wrapper {
+    background-color: $tLightGray !important;
+  }

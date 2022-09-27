@@ -1,0 +1,81 @@
+@import "../../index.scss";
+
+.container {
+	padding: 0 15px;
+}
+
+.title {
+	height: 50px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 50px;
+	color: tBlack;
+	font-family: $tFontHeavy;
+}
+
+.avatar {
+	margin-top: 15px;
+	height: 38px;
+	width: 38px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.name {
+	display: flex;
+	margin-top: 5px;
+	color: $tBlack;
+	font-size: 16px;
+	font-family: $tFontBold;
+	line-height: 19px;
+	.icon {
+		width: 19px;
+		margin-left: 2px;
+	}
+}
+
+.username {
+	font-size: 14px;
+	line-height: 19px;
+	color: $tGray;
+}
+
+.follow {
+	margin: 11px 0 15px 0;
+	font-size: 13px;
+	line-height: 19px;
+}
+.following {
+	font-family: $tFontHeavy;
+	margin-right: 3px;
+}
+
+.followers {
+	composes: following;
+	margin-left: 19px;
+}
+
+.list {
+	color: $tBlack;
+	font-size: 14px;
+	padding: 15px 0;
+	height: 19px;
+	line-height: 19px;
+	display: flex;
+	.listIcon {
+		width: 17.5px;
+		margin-right: 11px;
+	}
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color: $tBlack;
+	font-size: 14px;
+	line-height: 19px;
+	border-top: 1px solid $tBorderGray;
+	padding: 15px 15px 59px 15px;
+}

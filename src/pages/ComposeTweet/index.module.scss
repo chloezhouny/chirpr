@@ -1,0 +1,41 @@
+@import '../../index.scss';
+
+.contentContainer{
+	box-sizing: border-box;
+	display: flex;
+	padding: 8px 15px;
+	height: 114px;
+}
+
+.avatarContainer {
+	width: 58px;
+	height: 58px;
+	.avatar {
+	width: 46px;
+	height: 46px;
+	object-fit: cover;
+    border-radius: 50%;
+    }
+
+}
+
+.tweetContainer{
+	width: calc(100% - 58px);
+	:global(.adm-text-area) {
+	    margin-top: 8px;
+		padding: 2px 1px;
+		:global(.adm-text-area-element){
+		   height: 114px;
+		}
+	}
+	.imageUploadContainer {
+		border-top: solid 1px $tBorderGray;
+		padding: 22px 2px 0 2px;
+	}
+}
+
+
+
+
+
+

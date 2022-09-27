@@ -1,0 +1,97 @@
+@import "../../index.scss";
+
+.container {
+	:global(.adm-tab-bar-wrap) {
+		justify-content: space-between;
+		:global(.adm-tab-bar-item) {
+			flex: none;
+			padding-left: 0;
+		}
+	}
+}
+
+.containerBottom {
+	position: fixed;
+	height: 46px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+	padding: 0 15px 3px 8px;
+	:global(.adm-tab-bar-item) {
+		padding-bottom: 6px;
+	}
+	:global(.adm-tab-bar-item:nth-child(2)) {
+		padding-left: 13px;
+		padding-right: 3px;
+	}
+	:global(.adm-tab-bar-item:nth-child(3)) {
+		padding-left: 16px;
+		padding-right: 0;
+	}
+
+	.icon {
+		height: 21px;
+	}
+	.count {
+		line-height: 19px;
+	}
+}
+
+.icon {
+	font-family: $tFont;
+	height: 17px;
+	vertical-align: bottom;
+}
+
+.count {
+	line-height: 15px;
+	font-size: 12px;
+	color: $tGray;
+	margin-left: 8px;
+}
+
+.likedCount {	
+	composes: count;
+	color: #f91880;
+}
+
+.retweetedCount {
+	composes: count;
+	color: #00ba7c;
+}
+
+.actionSheetContainer {
+	:global(.adm-action-sheet-button-item-wrapper) {
+		border: none;
+		:global(.adm-action-sheet-button-item) {
+			padding: 11px 15px;
+		}
+	}
+	.copyLinkBtn {
+		display: flex;
+		flex-direction: row;
+		min-height: 19px;
+		line-height: 19px;
+		font-size: 14px;
+		text-align: left;
+		color: $tBlack;
+		.linkIcon {
+			margin-right: 11px;
+			svg {
+				fill: $tGray;
+				height: 17.5px;
+			}
+		}
+	}
+	.cancelShareBtn {
+		font-size: 14px;
+		font-family: $tFontBold;
+		line-height: 40px;
+		min-height: 40px;
+		border: solid 1px $tLightGray;
+		border-radius: 9999px;
+		padding: auto 23px;
+		box-sizing: border-box;
+	}
+}

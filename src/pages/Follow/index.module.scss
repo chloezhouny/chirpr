@@ -1,0 +1,26 @@
+@import "../../index.scss";
+.container {
+	:global(.adm-tabs-tab-list){
+		height: 50px;
+	}
+	:global(.adm-tabs-content){
+		padding: 11px 15px;
+	}
+	:global(.adm-tabs-tab){
+		color: $tBlack;
+		font-size: 14px;
+		line-height: 19px;
+		padding: 15px 0;
+	}
+	:global(.adm-tabs-tab-active){
+		font-family: $tFontBold;
+		color: $tBlack;
+		font-size: 14px;
+		line-height: 19px;
+	}
+	:global(.adm-tabs-tab-line){
+		background: $tBlue;
+		border-radius: 9999px;
+		height: 4px;
+	}
+}

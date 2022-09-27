@@ -1,0 +1,57 @@
+@import "../../index.scss";
+
+.container {
+	padding: 15px 14px;
+}
+
+.banner {
+	background-color: $tLightGray;
+	height: 130px;
+	margin: -15px -14px;
+}
+
+.avatarContainer {
+	position: relative;
+	width: 89.5px;
+	height: 89.5px;
+	margin-top: -40px;
+	border-radius: 50%;
+	border: 4px solid white;
+	overflow: hidden;
+	.avatar {
+		width: 89.5px;
+		height: 89.5px;
+		border-radius: 50%;
+		background-color: #ffffff;
+		object-fit: cover;
+	}
+	.iconContainer {
+		position: absolute;
+		top: 0;
+		width: 89.5px;
+		height: 89.5px;
+		border-radius: 50%;
+		background-color: rgba(0, 0, 0, 0.3);
+		z-index: 1;
+		.cameraIcon {
+			position: absolute;
+			top: 25px;
+			left: 25px;
+			border-radius: 50%;
+			width: 21px;
+			height: 21px;
+			padding: 10px;
+			backdrop-filter: blur(4px);
+			background-color: $tBlack;
+			opacity: 0.75;
+			z-index: 2;
+		}
+	}
+
+	.uploadAvatarInput {
+		opacity: 0;
+		position: absolute;
+		top: 34px;
+		z-index: 3;
+	}
+}
