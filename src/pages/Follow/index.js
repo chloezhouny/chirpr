@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Tabs } from 'antd-mobile';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { useAppContext } from '@utils/context';
 import { UserAPI } from '@utils/UserAPI';
 import Header from '@components/Header';
@@ -17,10 +18,18 @@ const TYPE = {
     title: 'Following',
   },
 };
+
+const getPageTitleType = (key) => {
+  if (key === TYPE.FOLLOWERS.key) {
+    return 'following';
+  }
+  return 'followed by';
+};
+
 const Follow = () => {
   const [data, setData] = useState([]);
   const location = useLocation();
-  const [activeKey, setActiveKey] = useState('');
+  const [activeKey, setActiveKey] = useState(location.state);
   const [store] = useAppContext();
 
   const handleIsFollowing = async (following) => {
@@ -94,6 +103,9 @@ const Follow = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{`People ${getPageTitleType(activeKey || location.state)} ${store.user?.name || 'Unkown'}`}</title>
+      </Helmet>
       <Header title={store.user?.name || 'Unkown'} />
       <div className={styles.container}>
         <Tabs

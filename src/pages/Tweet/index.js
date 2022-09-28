@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import Header from '@components/Header';
 import ImageCard from '@components/ImageCard';
@@ -23,6 +24,7 @@ const Tweet = () => {
   }, []);
   return (
     <>
+      <Helmet><title>{`${data.user.name} on twittuer: "${data.text}"`}</title></Helmet>
       <Header />
       <div className={styles.container}>
         <div className={styles.contentContainer}>

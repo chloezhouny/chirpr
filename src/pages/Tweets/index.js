@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import { PullToRefresh, InfiniteScroll, DotLoading } from 'antd-mobile';
 import {
   List,
@@ -88,47 +89,50 @@ const Tweets = () => {
     }
   };
   return (
-    <div className={styles.container}>
-      <PullToRefresh
-        onRefresh={async () => {
-          const res = await TweetAPI.getFeeds();
-          setData((feeds) => [...feeds, ...res]);
-        }}
-        renderText={(status) => <div>{statusRecord[status]}</div>}
-      >
-        <WindowScroller>
-          {({
-            width,
-            height,
-            isScrolling,
-            registerChild,
-            onChildScroll,
-            scrollTop,
-          }) => (
-            <div ref={registerChild}>
-              <List
-                ref={listRef}
-                deferredMeasurementCache={cache}
-                autoHeight
-                height={height}
-                width={width}
-                isScrolling={isScrolling}
-                onScroll={onChildScroll}
-                scrollTop={scrollTop}
-                overscanRowCount={2}
-                noRowsRenderer={noRowsRenderer}
-                rowCount={data.length}
-                rowHeight={cache.rowHeight}
-                rowRenderer={rowRenderer}
-              />
-            </div>
-          )}
-        </WindowScroller>
-      </PullToRefresh>
-      <InfiniteScroll loadMore={handleLoadMore} hasMore={hasMore}>
-        <InfiniteScrollContent hasMore={hasMore} />
-      </InfiniteScroll>
-    </div>
+    <>
+      <Helmet><title>Home / Twittuer</title></Helmet>
+      <div className={styles.container}>
+        <PullToRefresh
+          onRefresh={async () => {
+            const res = await TweetAPI.getFeeds();
+            setData((feeds) => [...feeds, ...res]);
+          }}
+          renderText={(status) => <div>{statusRecord[status]}</div>}
+        >
+          <WindowScroller>
+            {({
+              width,
+              height,
+              isScrolling,
+              registerChild,
+              onChildScroll,
+              scrollTop,
+            }) => (
+              <div ref={registerChild}>
+                <List
+                  ref={listRef}
+                  deferredMeasurementCache={cache}
+                  autoHeight
+                  height={height}
+                  width={width}
+                  isScrolling={isScrolling}
+                  onScroll={onChildScroll}
+                  scrollTop={scrollTop}
+                  overscanRowCount={2}
+                  noRowsRenderer={noRowsRenderer}
+                  rowCount={data.length}
+                  rowHeight={cache.rowHeight}
+                  rowRenderer={rowRenderer}
+                />
+              </div>
+            )}
+          </WindowScroller>
+        </PullToRefresh>
+        <InfiniteScroll loadMore={handleLoadMore} hasMore={hasMore}>
+          <InfiniteScrollContent hasMore={hasMore} />
+        </InfiniteScroll>
+      </div>
+    </>
   );
 };
 

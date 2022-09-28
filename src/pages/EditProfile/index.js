@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import Header from '@components/Header';
 import TInput from '@components/TInput';
 import TButton from '@components/TButton';
@@ -41,6 +42,7 @@ const EditProfile = () => {
   };
   return (
     <>
+      <Helmet><title>Edit Profile / Twittuer</title></Helmet>
       <Header title="Edit profile">
         <TButton handleOnClick={handleSaveProfile} isBlack>Save</TButton>
       </Header>

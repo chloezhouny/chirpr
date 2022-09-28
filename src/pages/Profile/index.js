@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Button, Tabs } from 'antd-mobile';
 import Header from '@components/Header';
 import TweetCard from '@components/TweetCard';
@@ -55,6 +56,14 @@ const Profile = () => {
 
   return (
     <>
+      <Helmet>
+        <title>
+          {
+            `${store.user?.name}
+          (@${store.user?.username}) / Twittuer`
+}
+        </title>
+      </Helmet>
       <Header title={store.user?.name || 'Unkown'} />
       <div className={styles.container}>
         <div className={styles.banner} />

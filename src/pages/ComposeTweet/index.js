@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { TextArea, Toast } from 'antd-mobile';
 import moment from 'moment';
 import Header from '@components/Header';
@@ -63,39 +64,44 @@ const ComposeTweet = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <Header>
-        <TButton
-          disabled={tweetContent.length === 0 && Object.keys(imgs).length === 0}
-          handleOnClick={handleTweetSubmit}
-          isBlue
-        >
-          Tweet
-        </TButton>
-      </Header>
-      <div className={styles.contentContainer}>
-        <div className={styles.avatarContainer}>
-          <img
-            className={styles.avatar}
-            src={store.user?.profile_image_url}
-            alt="avatar"
-          />
-        </div>
-        <div className={styles.tweetContainer}>
-          <TextArea
-            rows={5}
-            value={tweetContent}
-            onChange={handleTweetContentChange}
-            className={styles.tweet}
-            placeholder="What's happening?"
-          />
-          <ImagePreview imgs={Object.values(imgs)} handleImgDelete={handleImgDelete} />
-          <div className={styles.imageUploadContainer}>
-            <ImageUpload handleImgChange={handleImgChange} />
+    <>
+      <Helmet>
+        <title>Compose new Tweet / Twittuer</title>
+      </Helmet>
+      <div className={styles.container}>
+        <Header>
+          <TButton
+            disabled={tweetContent.length === 0 && Object.keys(imgs).length === 0}
+            handleOnClick={handleTweetSubmit}
+            isBlue
+          >
+            Tweet
+          </TButton>
+        </Header>
+        <div className={styles.contentContainer}>
+          <div className={styles.avatarContainer}>
+            <img
+              className={styles.avatar}
+              src={store.user?.profile_image_url}
+              alt="avatar"
+            />
+          </div>
+          <div className={styles.tweetContainer}>
+            <TextArea
+              rows={5}
+              value={tweetContent}
+              onChange={handleTweetContentChange}
+              className={styles.tweet}
+              placeholder="What's happening?"
+            />
+            <ImagePreview imgs={Object.values(imgs)} handleImgDelete={handleImgDelete} />
+            <div className={styles.imageUploadContainer}>
+              <ImageUpload handleImgChange={handleImgChange} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
