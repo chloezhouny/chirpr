@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ImageCard from '@components/ImageCard';
 import Bar from '@components/Bar';
@@ -10,40 +11,65 @@ import styles from './index.module.scss';
 const TweetCard = ({ dataSrc }) => {
   const goTo = useGoTo();
   const [store] = useAppContext();
+  const [data, setData] = useState(dataSrc);
+  const [retweeted, setRetweeted] = useState(false);
+  const [retweetId, setRetweetId] = useState();
+  const [liked, setLiked] = useState(false);
+  const [likedId, setLikedId] = useState();
+
   return (
     <div className={styles.container}>
       <div className={styles.avatarContainer}>
         <img
-          src={dataSrc.user?.profile_image_url || store.user.profile_image_url}
+          src={data.user?.profile_image_url || store.user.profile_image_url}
           alt="avatar"
           className={styles.avatar}
         />
       </div>
       <div className={styles.contentContainer}>
         <div className={styles.header}>
-          <span className={styles.name}>{dataSrc.user?.name || store.user.name || 'Unknown'}</span>
+          <span className={styles.name}>{data.user?.name || store.user.name || 'Unknown'}</span>
           @
-          <span className={styles.username}>{dataSrc.user?.username || store.user.username}</span>
+          <span className={styles.username}>{data.user?.username || store.user.username}</span>
         &nbsp;&#183;&nbsp;
-          {timeDiff(dataSrc.created_at)}
+          {timeDiff(data.created_at)}
         </div>
-        <div className={styles.text} onClick={() => goTo('tweet', { id: dataSrc.id }, { state: dataSrc })}>{dataSrc.text}</div>
-        {dataSrc.media_urls?.length > 0
+        <div className={styles.text} onClick={() => goTo('tweet', { id: data.id }, { state: data })}>{data.text}</div>
+        {data.media_urls?.length > 0
          && (
          <div className={styles.mediaContainer}>
            <ImageCard
-             imgs={dataSrc.media_urls}
-             replyCnt={dataSrc.comments_count}
-             retweetCnt={dataSrc.retweet_count}
-             likeCnt={dataSrc.likes_count}
+             data={data}
+             setData={setData}
+             imgs={data.media_urls}
+             replyCnt={data.comments_count}
+             retweetCnt={data.retweet_count}
+             likeCnt={data.likes_count}
+             setRetweeted={setRetweeted}
+             setRetweetId={setRetweetId}
+             retweeted={retweeted}
+             retweetId={retweetId}
+             setLiked={setLiked}
+             setLikedId={setLikedId}
+             liked={liked}
+             likedId={likedId}
            />
          </div>
          )}
         <div className={styles.bar}>
           <Bar
-            dataSrc={dataSrc}
-            id={dataSrc.id}
+            data={data}
+            setData={setData}
+            id={data.id}
             type={BAR_TYPE_KEYS.TWEET}
+            setRetweeted={setRetweeted}
+            setRetweetId={setRetweetId}
+            retweeted={retweeted}
+            retweetId={retweetId}
+            setLiked={setLiked}
+            setLikedId={setLikedId}
+            liked={liked}
+            likedId={likedId}
           />
         </div>
       </div>

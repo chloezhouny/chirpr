@@ -35,8 +35,7 @@ const EditProfile = () => {
         profile_image_url: avatar || store.user.profile_image_url,
       });
       if (res.data) {
-        window.location.reload();
-        goTo();
+        goTo('reload', 'profile');
       }
     }
   };

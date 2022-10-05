@@ -1,8 +1,27 @@
+@import "../../index.scss";
+
 .pullingIcon {
 	height: 2rem;
+}
+.refreshingIcon {
+	:global(.adm-spin-loading-svg > .adm-spin-loading-fill) {
+		stroke: $tBlue;
+	}
 }
 .canReleaseIcon {
 	height: 2rem;
 	transform: rotate(180deg);
 	transition-duration: 250ms;
+}
+
+.noRowIconContainer {
+	height: 90vh;
+	width: 100%;
+	.noRowIcon {
+		height: 100%;
+	    margin: auto;
+		:global(.adm-spin-loading-svg > .adm-spin-loading-fill) {
+			stroke: $tBlue;
+		}
+	}
 }

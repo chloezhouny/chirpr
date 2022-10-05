@@ -17,8 +17,8 @@ const ComposeTweet = () => {
   const [store] = useAppContext();
   const goTo = useGoTo();
 
-  const handleTweetSubmit = () => {
-    TweetAPI.createTweet({
+  const handleTweetSubmit = async () => {
+    const res = await TweetAPI.createTweet({
       created_at: moment(),
       user: {
         id: store.user?.id,
@@ -31,12 +31,11 @@ const ComposeTweet = () => {
       comments_count: 0,
       retweet_count: 0,
       media_urls: Object.values(imgs),
-    }).then((res) => {
-      if (res.success) {
-        Toast.show('Your tweet was sent.');
-        goTo('');
-      }
     });
+    if (res.success) {
+      sessionStorage.setItem('toastMsg', 'Your tweet was sent.');
+      goTo('reload', '');
+    }
   };
 
   const handleTweetContentChange = (v) => {

@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { PullToRefresh, InfiniteScroll, DotLoading } from 'antd-mobile';
+import {
+  PullToRefresh, InfiniteScroll, SpinLoading, Toast,
+} from 'antd-mobile';
 import {
   List,
   CellMeasurer,
@@ -21,10 +23,7 @@ const cache = new CellMeasurerCache({
 const InfiniteScrollContent = ({ hasMore }) => {
   if (hasMore) {
     return (
-      <>
-        <span>Loading</span>
-        <DotLoading />
-      </>
+      <SpinLoading />
     );
   }
   return (<span>No more content</span>);
@@ -40,10 +39,7 @@ const statusRecord = {
   pulling: (<img className={styles.pullingIcon} src={VerticalArrowIcon} alt="pulling" />),
   canRelease: (<img className={styles.canReleaseIcon} src={VerticalArrowIcon} alt="canRelease" />),
   refreshing: (
-    <>
-      <span>Loading</span>
-      <DotLoading />
-    </>
+    <SpinLoading className={styles.refreshingIcon} style={{ '--size': '26px' }} />
   ),
   complete: 'Refreshed',
 };
@@ -51,16 +47,28 @@ const statusRecord = {
 const Tweets = () => {
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(false);
-  const listRef = useRef();
+
+  const showToastMsg = async () => {
+    const toastMsg = sessionStorage.getItem('toastMsg');
+    if (toastMsg !== '') {
+      await Toast.show(toastMsg);
+      sessionStorage.setItem('toastMsg', '');
+    }
+  };
   useEffect(() => {
     const init = async () => {
       const res = await TweetAPI.getFeeds();
       setData(res);
+      showToastMsg();
     };
     init();
   }, []);
 
-  const noRowsRenderer = () => 'loading...';
+  const noRowsRenderer = () => (
+    <div className={styles.noRowIconContainer}>
+      <SpinLoading className={styles.noRowIcon} />
+    </div>
+  );
   const rowRenderer = ({
     key, style: st, index, parent,
   }) => (
@@ -110,7 +118,6 @@ const Tweets = () => {
             }) => (
               <div ref={registerChild}>
                 <List
-                  ref={listRef}
                   deferredMeasurementCache={cache}
                   autoHeight
                   height={height}
