@@ -8,7 +8,9 @@ import styles from './index.module.scss';
 
 const CommentCard = ({ dataSrc }) => {
   const goTo = useGoTo();
-  const [data] = useState(dataSrc);
+  const [data, setData] = useState(dataSrc);
+  const [liked, setLiked] = useState(false);
+  const [likedId, setLikedId] = useState();
   return (
     <div className={styles.container}>
       <div className={styles.avatarContainer}>
@@ -34,11 +36,16 @@ const CommentCard = ({ dataSrc }) => {
         </div>
         <div className={styles.bar}>
           <Bar
-            dataSrc={data}
+            data={data}
+            setData={setData}
             likeOnly
             id={data.id}
             likeCnt={data.likes_count}
             type={BAR_TYPE_KEYS.REPLY}
+            setLiked={setLiked}
+            setLikedId={setLikedId}
+            liked={liked}
+            likedId={likedId}
           />
         </div>
       </div>

@@ -45,7 +45,7 @@ const Bar = ({
         setLiked(true);
         setLikedId(likesRes.data[0].id);
       }
-      if (retweetsRes.success && retweetsRes.data.length > 0) {
+      if (retweetsRes && retweetsRes.success && retweetsRes.data.length > 0) {
         setRetweeted(true);
         setRetweetId(retweetsRes.data[0].id);
       }

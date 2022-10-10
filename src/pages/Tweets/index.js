@@ -55,6 +55,7 @@ const Tweets = () => {
       sessionStorage.setItem('toastMsg', '');
     }
   };
+
   useEffect(() => {
     const init = async () => {
       const res = await TweetAPI.getFeeds();
@@ -80,7 +81,7 @@ const Tweets = () => {
       parent={parent}
     >
       {({ registerChild }) => (
-        <div style={st} key={key} ref={registerChild}>
+        <div style={{ ...st }} key={key} ref={registerChild}>
           <TweetCard
             dataSrc={data[index]}
           />
@@ -88,7 +89,6 @@ const Tweets = () => {
       )}
     </CellMeasurer>
   );
-
   const handleLoadMore = async () => {
     const res = await TweetAPI.getFeeds();
     setData((feeds) => [...feeds, ...res]);

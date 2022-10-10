@@ -62,6 +62,7 @@ const ImageCard = ({
             key={classNames(img, index)}
             src={img}
             alt=""
+            lazy
           />
         ))}
       </div>
