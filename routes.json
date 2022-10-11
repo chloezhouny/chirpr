@@ -22,6 +22,7 @@
 	"/api/friendships/following/:id": "/friendships/:id",
 	"/api/friendships/:userId/following/:targetUserId": "/friendships/?userId=:userId&following.userId=:targetUserId",
 	"/api/accounts/signup": "/user",
+    "/api/users": "/user",
 	"/api/users/:id": "/user/:id",
 	"/api/login/:username/:password": "/user/?username=:username&password=:password"
 }

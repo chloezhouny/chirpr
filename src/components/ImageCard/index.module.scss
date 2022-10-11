@@ -11,19 +11,21 @@
 	.wrapper {
 		position: relative;
 		border-radius: 15px;
+		width: 100%;
 		height: 170px;
+		overflow: hidden;
 	}
 	.wrapper1 {
 		:global(.img0) {
 			left: 0;
 			width: 100%;
-			object-fit: cover;
+			height: 170px;
+			object-fit: contain;
 			border-radius: 15px;
 		}
 	}
 
 	.wrapper2 {
-		overflow: hidden;
 		:global(.img0) {
 			left: 0;
 			height: 170px;
@@ -36,7 +38,6 @@
 		}
 	}
 	.wrapper3 {
-		overflow: hidden;
 		:global(.img0) {
 			left: 0;
 			height: 170px;
@@ -57,7 +58,6 @@
 		}
 	}
 	.wrapper4 {
-		overflow: hidden;
 		:global(.img0) {
 			left: 0;
 			height: 85px;
@@ -86,4 +86,3 @@
 		}
 	}
 }
-

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Toast } from 'antd-mobile';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '@utils/context';
@@ -47,28 +48,34 @@ function Signup() {
   const handleSignupSubmit = async (password) => {
     const res = await SignupAPI({
       password,
+      name: '',
       ...userInfo,
+      profile_image_url: 'https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png?w=640',
     });
     if (res.success) {
       Toast.show("Good job! You're all set and ready to explore the app.");
+      navigate('/login');
     }
     Toast.show('Oops, that definitely should not happen.');
   };
 
   return (
-    <div className={styles.container}>
-      {/*      <Header handleClose={handleClose} step={step} /> */}
-      <Show visible={store.step === STEP.FIRST}>
-        <SignupFirstStep handleNextStep={handleNextStep} />
-      </Show>
-      <Show visible={store.step === STEP.SECOND}>
-        <SignupSecondStep
-          userInfo={userInfo}
-          setSigupFirstStepStore={setSigupFirstStepStore}
-          handleSignupSubmit={handleSignupSubmit}
-        />
-      </Show>
-    </div>
+    <>
+      <Helmet><title>Sign up for Twittuer / Twittuer</title></Helmet>
+      <div className={styles.container}>
+        {/*      <Header handleClose={handleClose} step={step} /> */}
+        <Show visible={store.step === STEP.FIRST}>
+          <SignupFirstStep handleNextStep={handleNextStep} />
+        </Show>
+        <Show visible={store.step === STEP.SECOND}>
+          <SignupSecondStep
+            userInfo={userInfo}
+            setSigupFirstStepStore={setSigupFirstStepStore}
+            handleSignupSubmit={handleSignupSubmit}
+          />
+        </Show>
+      </div>
+    </>
   );
 }
 

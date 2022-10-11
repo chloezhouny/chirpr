@@ -10,6 +10,9 @@ export const UserAPI = {
   updateUser(id, params) {
     return put(`/api/users/${Number(id)}`, params);
   },
+  getAllUsers() {
+    return get('/api/users');
+  },
   getFollowers(userId) {
     return get(`/api/friendships/${Number(userId)}/followers`);
   },

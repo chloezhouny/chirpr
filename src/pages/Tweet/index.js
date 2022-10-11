@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import Header from '@components/Header';
 import ImageCard from '@components/ImageCard';
@@ -11,11 +12,16 @@ import styles from './index.module.scss';
 
 const Tweet = () => {
   const location = useLocation();
-  const [data, setData] = useState(location.state);
+  const dataSrc = location.state;
+  const [data, setData] = useState(dataSrc);
   const [commentData, setCommentData] = useState([]);
+  const [retweeted, setRetweeted] = useState(false);
+  const [retweetId, setRetweetId] = useState();
+  const [liked, setLiked] = useState(false);
+  const [likedId, setLikedId] = useState();
   useEffect(() => {
     const init = async () => {
-      setData(location.state);
+      setData(dataSrc);
       const res = await ReplyAPI.getReplysByTweet(location.state.id);
       setCommentData(res.data);
     };
@@ -23,6 +29,7 @@ const Tweet = () => {
   }, []);
   return (
     <>
+      <Helmet><title>{`${data.user.name} on twittuer: "${data.text}"`}</title></Helmet>
       <Header />
       <div className={styles.container}>
         <div className={styles.contentContainer}>
@@ -48,10 +55,20 @@ const Tweet = () => {
           {data.media_urls.length > 0 && (
           <div className={styles.photo}>
             <ImageCard
+              data={data}
+              setData={setData}
               imgs={data.media_urls}
               replyCnt={data.comments_count}
               retweetCnt={data.retweet_count}
               likeCnt={data.likes_count}
+              setRetweeted={setRetweeted}
+              setRetweetId={setRetweetId}
+              retweeted={retweeted}
+              retweetId={retweetId}
+              setLiked={setLiked}
+              setLikedId={setLikedId}
+              liked={liked}
+              likedId={likedId}
             />
           </div>
           )}
@@ -62,12 +79,21 @@ const Tweet = () => {
         </div>
         <div className={styles.bar}>
           <Bar
-            dataSrc={data}
+            data={data}
+            setData={setData}
             id={data.id}
             replyCnt={data.comments_count}
             retweetCnt={data.retweet_count}
             likeCnt={data.likes_count}
             type={BAR_TYPE_KEYS.TWEET}
+            setRetweeted={setRetweeted}
+            setRetweetId={setRetweetId}
+            retweeted={retweeted}
+            retweetId={retweetId}
+            setLiked={setLiked}
+            setLikedId={setLikedId}
+            liked={liked}
+            likedId={likedId}
           />
         </div>
       </div>

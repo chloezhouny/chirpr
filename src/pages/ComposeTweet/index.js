@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { TextArea, Toast } from 'antd-mobile';
 import moment from 'moment';
 import Header from '@components/Header';
@@ -16,8 +17,8 @@ const ComposeTweet = () => {
   const [store] = useAppContext();
   const goTo = useGoTo();
 
-  const handleTweetSubmit = () => {
-    TweetAPI.createTweet({
+  const handleTweetSubmit = async () => {
+    const res = await TweetAPI.createTweet({
       created_at: moment(),
       user: {
         id: store.user?.id,
@@ -30,12 +31,11 @@ const ComposeTweet = () => {
       comments_count: 0,
       retweet_count: 0,
       media_urls: Object.values(imgs),
-    }).then((res) => {
-      if (res.success) {
-        Toast.show('Your tweet was sent.');
-        goTo('');
-      }
     });
+    if (res.success) {
+      sessionStorage.setItem('toastMsg', 'Your tweet was sent.');
+      goTo('reload', '');
+    }
   };
 
   const handleTweetContentChange = (v) => {
@@ -63,39 +63,44 @@ const ComposeTweet = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <Header>
-        <TButton
-          disabled={tweetContent.length === 0 && Object.keys(imgs).length === 0}
-          handleOnClick={handleTweetSubmit}
-          isBlue
-        >
-          Tweet
-        </TButton>
-      </Header>
-      <div className={styles.contentContainer}>
-        <div className={styles.avatarContainer}>
-          <img
-            className={styles.avatar}
-            src={store.user?.profile_image_url}
-            alt="avatar"
-          />
-        </div>
-        <div className={styles.tweetContainer}>
-          <TextArea
-            rows={5}
-            value={tweetContent}
-            onChange={handleTweetContentChange}
-            className={styles.tweet}
-            placeholder="What's happening?"
-          />
-          <ImagePreview imgs={Object.values(imgs)} handleImgDelete={handleImgDelete} />
-          <div className={styles.imageUploadContainer}>
-            <ImageUpload handleImgChange={handleImgChange} />
+    <>
+      <Helmet>
+        <title>Compose new Tweet / Twittuer</title>
+      </Helmet>
+      <div className={styles.container}>
+        <Header>
+          <TButton
+            disabled={tweetContent.length === 0 && Object.keys(imgs).length === 0}
+            handleOnClick={handleTweetSubmit}
+            isBlue
+          >
+            Tweet
+          </TButton>
+        </Header>
+        <div className={styles.contentContainer}>
+          <div className={styles.avatarContainer}>
+            <img
+              className={styles.avatar}
+              src={store.user?.profile_image_url}
+              alt="avatar"
+            />
+          </div>
+          <div className={styles.tweetContainer}>
+            <TextArea
+              rows={5}
+              value={tweetContent}
+              onChange={handleTweetContentChange}
+              className={styles.tweet}
+              placeholder="What's happening?"
+            />
+            <ImagePreview imgs={Object.values(imgs)} handleImgDelete={handleImgDelete} />
+            <div className={styles.imageUploadContainer}>
+              <ImageUpload handleImgChange={handleImgChange} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

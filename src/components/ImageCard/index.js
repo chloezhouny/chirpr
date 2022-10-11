@@ -7,7 +7,15 @@ import { BAR_TYPE_KEYS } from '@components/Bar/constants';
 import styles from './index.module.scss';
 
 const ImageCard = ({
-  imgs, replyCnt, retweetCnt, likeCnt,
+  imgs, replyCnt, retweetCnt, likeCnt, data, setData,
+  setRetweeted,
+  setRetweetId,
+  retweeted,
+  retweetId,
+  setLiked,
+  setLikedId,
+  liked,
+  likedId,
 }) => {
   const imageViewRef = useRef();
   const imageContainerRef = useRef();
@@ -54,6 +62,7 @@ const ImageCard = ({
             key={classNames(img, index)}
             src={img}
             alt=""
+            lazy
           />
         ))}
       </div>
@@ -67,11 +76,22 @@ const ImageCard = ({
         }}
         renderFooter={() => (
           <Bar
+            id={data.id}
             isBottom
             replyCnt={replyCnt}
             retweetCnt={retweetCnt}
             likeCnt={likeCnt}
+            data={data}
+            setData={setData}
             type={BAR_TYPE_KEYS.TWEET}
+            setRetweeted={setRetweeted}
+            setRetweetId={setRetweetId}
+            retweeted={retweeted}
+            retweetId={retweetId}
+            setLiked={setLiked}
+            setLikedId={setLikedId}
+            liked={liked}
+            likedId={likedId}
           />
         )}
       />
@@ -84,6 +104,17 @@ ImageCard.propTypes = {
   replyCnt: PropTypes.number,
   retweetCnt: PropTypes.number,
   likeCnt: PropTypes.number,
+  // eslint-disable-next-line react/forbid-prop-types
+  data: PropTypes.object,
+  setData: PropTypes.func,
+  setRetweeted: PropTypes.func,
+  setRetweetId: PropTypes.func,
+  retweeted: PropTypes.bool,
+  retweetId: PropTypes.number,
+  setLiked: PropTypes.func,
+  setLikedId: PropTypes.func,
+  liked: PropTypes.bool,
+  likedId: PropTypes.number,
 };
 
 ImageCard.defaultProps = {
@@ -91,6 +122,16 @@ ImageCard.defaultProps = {
   replyCnt: undefined,
   retweetCnt: undefined,
   likeCnt: undefined,
+  data: {},
+  setData: () => {},
+  setRetweeted: () => {},
+  setRetweetId: () => {},
+  retweeted: false,
+  retweetId: -1,
+  setLiked: () => {},
+  setLikedId: () => {},
+  liked: false,
+  likedId: -1,
 };
 
 export default ImageCard;

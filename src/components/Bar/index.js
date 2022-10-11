@@ -16,16 +16,19 @@ import {
 import styles from './index.module.scss';
 
 const Bar = ({
-  dataSrc, id, isBottom, likeOnly, type,
+  data, setData, id, isBottom, likeOnly, type,
+  setRetweeted,
+  setRetweetId,
+  retweeted,
+  retweetId,
+  setLiked,
+  setLikedId,
+  liked,
+  likedId,
 }) => {
   const [store] = useAppContext();
-  const [data, setData] = useState(dataSrc);
   const [activeKey, setActiveKey] = useState();
   const [visible, setVisible] = useState(false);
-  const [retweeted, setRetweeted] = useState(false);
-  const [retweetId, setRetweetId] = useState();
-  const [liked, setLiked] = useState(false);
-  const [likedId, setLikedId] = useState();
   const goTo = useGoTo();
 
   useEffect(() => {
@@ -42,7 +45,7 @@ const Bar = ({
         setLiked(true);
         setLikedId(likesRes.data[0].id);
       }
-      if (retweetsRes.success && retweetsRes.data.length > 0) {
+      if (retweetsRes && retweetsRes.success && retweetsRes.data.length > 0) {
         setRetweeted(true);
         setRetweetId(retweetsRes.data[0].id);
       }
@@ -52,7 +55,7 @@ const Bar = ({
   const handleTabClick = async (e) => {
     const { key } = e.target.dataset;
     if (key === TAB_KEYS.REPLY) {
-      goTo('reply', { id }, { state: dataSrc });
+      goTo('reply', { id }, { state: data });
     }
     if (key === TAB_KEYS.RETWEET) {
       if (retweeted) {
@@ -99,7 +102,7 @@ const Bar = ({
         const res = await ReplyAPI.createLike({
           content_type: type,
           userId: store.user?.id,
-          tweetId: type === 'tweet' ? id : dataSrc.tweet_id,
+          tweetId: type === 'tweet' ? id : data.tweet_id,
           commentId: type === 'reply' ? id : -1,
         });
         if (res.success) {
@@ -178,19 +181,37 @@ const Bar = ({
 
 Bar.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  dataSrc: PropTypes.object,
+  data: PropTypes.object,
+  setData: PropTypes.func,
   id: PropTypes.number,
   isBottom: PropTypes.bool,
   likeOnly: PropTypes.bool,
   type: PropTypes.oneOf([BAR_TYPE_KEYS.REPLY, BAR_TYPE_KEYS.TWEET]),
+  setRetweeted: PropTypes.func,
+  setRetweetId: PropTypes.func,
+  retweeted: PropTypes.bool,
+  retweetId: PropTypes.number,
+  setLiked: PropTypes.func,
+  setLikedId: PropTypes.func,
+  liked: PropTypes.bool,
+  likedId: PropTypes.number,
 };
 
 Bar.defaultProps = {
-  dataSrc: {},
+  data: {},
+  setData: () => {},
   id: -1,
   isBottom: false,
   likeOnly: false,
   type: '',
+  setRetweeted: () => {},
+  setRetweetId: () => {},
+  retweeted: false,
+  retweetId: -1,
+  setLiked: () => {},
+  setLikedId: () => {},
+  liked: false,
+  likedId: -1,
 };
 
 export default Bar;

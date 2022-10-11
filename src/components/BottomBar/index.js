@@ -22,7 +22,9 @@ const BottomBar = () => {
     // const newTab = getTabByKey(key);
     // setStore({ title: newTab.title });
     // console.log(store);
-    goTo(key);
+    if (key === 'home') {
+      goTo(key);
+    }
   };
 
   if (curTab.hideAppHeader) {

@@ -13,6 +13,10 @@ export const useGoTo = () => {
     if (!key) {
       return navigate(-1);
     }
+    if (key === 'reload') {
+      navigate(`/${params}`);
+      return navigate(0);
+    }
     const curTab = getTabByKey(key);
     if (!curTab) return navigate('/');
     let { link } = curTab;
