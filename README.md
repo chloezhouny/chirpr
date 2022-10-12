@@ -7,7 +7,7 @@ This app is built with React, with a mock backend using json-server.
 ## The App
 Sign up/Login and Edit Profile | Comment, like or share |  Tweet, follow, or unfollow
 :-------------------------:|:-------------------------:|:-------------------------:
-<img src="public/1.gif" width=300 alt="gif 1" />  | <img src="public/2.gif" width=300 alt="gif 2" /> | <img src="public/3.gif" width=300 alt="gif 3" />
+<img src="public/1.gif" width=200 alt="gif 1" />  | <img src="public/2.gif" width=200 alt="gif 2" /> | <img src="public/3.gif" width=200 alt="gif 3" />
 
 
 # Features
