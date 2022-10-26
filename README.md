@@ -20,12 +20,14 @@ Sign up/Login and Edit Profile | Comment, like or share |  Tweet, follow, or unf
 
 # Technologies Used
 * HTML
-* CSS
+* CSS, SCSS, CSS modules
 * JavaScript
 * React.js
-* Node.js
 * React Virtualize
 * Ant Mobile Design
+* postcss-px-to-viewport
+* craco-alias
+* Node.js
 * Axios
 * json-server
 
