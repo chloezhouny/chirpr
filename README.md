@@ -20,7 +20,7 @@ Sign up/Login and Edit Profile | Comment, like or share |  Tweet, follow, or unf
 
 # Technologies Used
 * HTML
-* CSS, SCSS, CSS modules
+* CSS, Sass, CSS modules
 * JavaScript
 * React.js
 * React Virtualize
