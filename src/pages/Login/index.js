@@ -71,7 +71,7 @@ const Login = () => {
             name="username"
             rules={[{ required: true, message: '' }]}
           >
-            <TInput label="Phone, email, or username" valid />
+            <TInput label="Username" valid />
           </Form.Item>
           <Form.Item name="password" rules={[{ required: true, message: '' }]}>
             <TInput label="Password" type="password" valid />
