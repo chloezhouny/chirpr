@@ -41,7 +41,7 @@ const EditProfile = () => {
   };
   return (
     <>
-      <Helmet><title>Edit Profile / Twittuer</title></Helmet>
+      <Helmet><title>Edit Profile / Chirpr</title></Helmet>
       <Header title="Edit profile">
         <TButton handleOnClick={handleSaveProfile} isBlack>Save</TButton>
       </Header>

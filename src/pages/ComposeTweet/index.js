@@ -65,7 +65,7 @@ const ComposeTweet = () => {
   return (
     <>
       <Helmet>
-        <title>Compose new Tweet / Twittuer</title>
+        <title>Compose new Tweet / Chirpr</title>
       </Helmet>
       <div className={styles.container}>
         <Header>

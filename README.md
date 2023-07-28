@@ -1,7 +1,7 @@
-# Twittuer
-Twittuer is a mobile web app that mocks Twitter. Users can post, comment, like, and share tweets, as well as follow other users.
+# Chirpr
+Chirpr is a mobile web app that mocks Twitter. Users can post, comment, like, and share tweets, as well as follow other users.
 This app is built with React, with a mock backend using json-server.
-[Link to Deployment](https://twittuer.netlify.app/)
+[Link to Deployment](https://chirpr.netlify.app)
 
 ## The App
 Sign up/Login and Edit Profile | Comment, like or share |  Tweet, follow, or unfollow

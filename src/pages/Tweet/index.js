@@ -29,7 +29,7 @@ const Tweet = () => {
   }, []);
   return (
     <>
-      <Helmet><title>{`${data.user.name} on twittuer: "${data.text}"`}</title></Helmet>
+      <Helmet><title>{`${data.user.name} on chirpr: "${data.text}"`}</title></Helmet>
       <Header />
       <div className={styles.container}>
         <div className={styles.contentContainer}>
@@ -75,7 +75,7 @@ const Tweet = () => {
         </div>
         <div className={styles.time}>
           {`${moment(data.created_at).format('hh:mm A · MMM Do, YYYY')}`}
-         &nbsp;&#183;&nbsp; Twittuer for iPhone
+         &nbsp;&#183;&nbsp; Chirpr for iPhone
         </div>
         <div className={styles.bar}>
           <Bar

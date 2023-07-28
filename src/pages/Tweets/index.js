@@ -98,7 +98,7 @@ const Tweets = () => {
   };
   return (
     <>
-      <Helmet><title>Home / Twittuer</title></Helmet>
+      <Helmet><title>Home / Chirpr</title></Helmet>
       <div className={styles.container}>
         <PullToRefresh
           onRefresh={async () => {

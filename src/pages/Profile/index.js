@@ -70,7 +70,7 @@ const Profile = () => {
         <title>
           {
             `${store.user?.name}
-          (@${store.user?.username}) / Twittuer`
+          (@${store.user?.username}) / Chirpr`
 }
         </title>
       </Helmet>

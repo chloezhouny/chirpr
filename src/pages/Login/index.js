@@ -59,9 +59,9 @@ const Login = () => {
 
   return (
     <>
-      <Helmet><title>Log in to Twittuer / Twittuer</title></Helmet>
+      <Helmet><title>Log in to Chirpr / Chirpr</title></Helmet>
       <div className={styles.form}>
-        <div className={styles.formTitle}>Sign in to Twittuer</div>
+        <div className={styles.formTitle}>Sign in to Chirpr</div>
         <Form
           form={form}
           onValuesChange={handleValuesChange}

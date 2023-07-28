@@ -61,7 +61,7 @@ function Signup() {
 
   return (
     <>
-      <Helmet><title>Sign up for Twittuer / Twittuer</title></Helmet>
+      <Helmet><title>Sign up for Chirpr / Chirpr</title></Helmet>
       <div className={styles.container}>
         {/*      <Header handleClose={handleClose} step={step} /> */}
         <Show visible={store.step === STEP.FIRST}>

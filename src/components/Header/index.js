@@ -20,7 +20,7 @@ function Header({ children, title }) {
   const curTab = useCurTab();
   const result = [];
 
-  // header for twittuer member pages
+  // header for chirpr member pages
   if (store.user) {
     if (curTab?.hideAppHeader) {
       result.push(
@@ -81,9 +81,9 @@ function Header({ children, title }) {
   if (!store.user) {
     result.push(
       <img
-        key="twittuerLogo"
+        key="chirprLogo"
         src={logo}
-        alt="twittuer-logo"
+        alt="chirpr-logo"
         className={store.handleClose ? styles.logo : styles.logoLogin}
       />,
     );

@@ -54,7 +54,7 @@ const Reply = () => {
   };
   return (
     <>
-      <Helmet><title>Compose new Tweet / Twittuer</title></Helmet>
+      <Helmet><title>Compose new Tweet / Chirpr</title></Helmet>
       <div className={styles.container}>
         <Header>
           <TButton disabled={replyContent.length === 0} handleOnClick={handleOnClick} isBlue>

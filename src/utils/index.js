@@ -26,7 +26,8 @@ export const timeDiff = (time) => {
   return `${min || 1}m`;
 };
 
-const baseURL = 'http://localhost:3333';
+// const baseURL = 'http://localhost:3000';
+const baseURL = 'https://sheltered-caverns-08209-6f84c3fa1ea3.herokuapp.com';
 axios.interceptors.request.use((config) => ({
   ...config,
   url: baseURL + config.url,
